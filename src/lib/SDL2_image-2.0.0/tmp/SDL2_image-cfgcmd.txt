@@ -1,0 +1,1 @@
+cmd='/home/stark/Gamedev/EIM/engine/src/lib/SDL2_image-2.0.0/configure;--prefix=/home/stark/Gamedev/EIM/engine/src/lib/SDL2_image-2.0.0'
