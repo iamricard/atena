@@ -3,7 +3,9 @@ compiler:
     - gcc
 
 before_install:
-    - sudo add-apt-repository ppa:zoogie/sdl2-snapshots
+    - mkdir deps
+    - cd deps
+    - sudo add-apt-repository ppa:zoogie/sdl2-snapshots -y
     - sudo apt-get update -q
     - sudo apt-get install cmake
     - sudo apt-get install libsdl2
