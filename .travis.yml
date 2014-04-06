@@ -32,12 +32,20 @@ before_install:
     - make
     - sudo make install
 
+    - cd ../
+    - git clone https://github.com/akheron/jansson.git
+    - cd jansson
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
+    - sudo make install
+
     - sudo ldconfig
 
     - cd ../../
     - mkdir build
     - cd build
     - cmake ..
-    - make
 
 script: make

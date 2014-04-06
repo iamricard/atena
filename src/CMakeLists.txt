@@ -2,7 +2,7 @@
 # Date: 30 March 2014
 
 # Add subdirectories
-add_subdirectory(External)
+# add_subdirectory(External)
 add_subdirectory(Game)
 add_subdirectory(Sprite)
 add_subdirectory(Textures)
