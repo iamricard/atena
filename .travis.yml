@@ -43,7 +43,7 @@ before_install:
 
     - sudo ldconfig
 
-    - cd ../../
+    - cd ../../../
     - mkdir build
     - cd build
     - cmake ..
