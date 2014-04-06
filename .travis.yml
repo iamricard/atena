@@ -10,7 +10,7 @@ before_install:
     - sudo apt-get install cmake
     - sudo apt-get install libsdl2
     - sudo apt-get install libsdl2-image
-    - sudo apt-get install libbox2d2.3.0
+    - sudo apt-get install libbox2d
 
     - mkdir build
     - cd build
