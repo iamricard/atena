@@ -14,7 +14,7 @@ before_install:
     - make
     - sudo make install
 
-    - cd ..
+    - cd ../../../
     - wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
     - tar xvf SDL2-2.0.3.tar.gz
     - cd SDL2-2.0.3
@@ -24,7 +24,7 @@ before_install:
     - make
     - sudo make install
 
-    - cd ..
+    - cd ../../
     - wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz
     - tar xvf SDL2_image-2.0.0.tar.gz
     - cd SDL2_image-2.0.0
@@ -34,9 +34,10 @@ before_install:
 
     - sudo ldconfig
 
-    - cd ../../../../../
+    - cd ../../
     - mkdir build
     - cd build
     - cmake ..
+    - make
 
 script: make
