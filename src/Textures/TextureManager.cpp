@@ -12,7 +12,9 @@ void TextureManager::render() {
     }
 }
 
-void TextureManager::loadTexture(char const *key, char const *pathJSON, char const *pathIMG) {
+void TextureManager::loadTexture(char const *key,
+                                 char const *pathJSON,
+                                 char const *pathIMG) {
     json_t *tmpJSON = NULL;
     SDL_Texture *tmpTex = NULL;
     Texture t;
