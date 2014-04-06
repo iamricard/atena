@@ -7,16 +7,11 @@ cmake_minimum_required(VERSION 2.8)
 # Project Name
 project(Atena)
 
-# Add non-cmake projects
-include(ExternalProject)
-ExternalProject_Add(
-    SDL2_image
-    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/SDL2_image-2.0.0
-    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/SDL2_image-2.0.0/configure --prefix=${CMAKE_CURRENT_SOURCE_DIR}/src/lib/SDL2_image-2.0.0
-    PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/SDL2_image-2.0.0
-    BUILD_COMMAND make
-    BUILD_IN_SOURCE 1
-)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
+find_package(SDL2 REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(Box2D REQUIRED)
 
 # Add ./src directory
 add_subdirectory(src)

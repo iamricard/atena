@@ -8,19 +8,30 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         printf("SDL_Init success\n");
 
-        win = SDL_CreateWindow(title,
+        m_pWindow = SDL_CreateWindow(title,
                 xpos, ypos,
                 width, height,
                 flags);
 
-        if (win != 0) {
+        if (m_pWindow != 0) {
             printf("SDL_CreateWindow success\n");
 
-            renderer = SDL_CreateRenderer(win, -1, 0);
+            m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 
-            if (renderer != 0) {
+            if (m_pRenderer != 0) {
                 printf("SDL_CreateRenderer success\n");
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+                SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+
+                textures = new TextureManager(m_pRenderer);
+
+                if (textures != 0) {
+                    printf("Texture Manager success\n");
+
+                } else {
+                    printf("Texture Manager error\n");
+                    return false;
+
+                }
 
             } else {
                 printf("SDL_CreateRenderer error\n");
@@ -36,21 +47,20 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     }
 
     printf("Init succes\n");
-    m_bRunning = true;
+    m_Running = true;
 
     return true;
 }
 
 void Game::render() {
-    SDL_RenderClear(renderer);
-
-    SDL_RenderPresent(renderer);
+    SDL_RenderClear(m_pRenderer);
+    SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::clean() {
-    printf("cleaning game\n");
-    SDL_DestroyWindow(win);
-    SDL_DestroyRenderer(renderer);
+    printf("Cleaning game\n");
+    SDL_DestroyWindow(m_pWindow);
+    SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();
 }
 
@@ -59,7 +69,7 @@ void Game::handleEvents() {
     if (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT:
-                m_bRunning = false;
+                m_Running = false;
                 break;
 
             default:

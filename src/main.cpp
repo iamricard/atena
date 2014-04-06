@@ -3,23 +3,24 @@
 #include <cstdio>
 #include "Game/Game.h"
 
-Game* game = 0;
+Game *game = NULL;
 
 int main(int argc, char const *argv[]) {
     game = new Game();
 
-    game->init("Game Engine v0.0.1",
+    game->init("Atena Game Engine v0.0.1",
             100, 100,
             640, 480,
             SDL_WINDOW_RESIZABLE);
 
+    game->textures->loadTexture("test1", "test1.json", "test1.png");
+
     while (game->running()) {
         game->handleEvents();
         // game->update();
+        game->textures->render();
         game->render();
     }
-
-    // printf("OK Bye");
 
     game->clean();
 

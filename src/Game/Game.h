@@ -4,6 +4,10 @@
 #define __Game__
 
 #include <SDL2/SDL.h>
+#include <vector>
+
+#include "../Sprite/Sprite.h"
+#include "../Textures/TextureManager.h"
 
 class Game {
  public:
@@ -15,18 +19,22 @@ class Game {
             int width, int height,
             int flags);
 
+    void addSprite(const char* imgUrl, int x, int y, int w, int h);
+
     void render();
     void update();
     void handleEvents();
     void clean();
 
-    bool running() { return m_bRunning; }
+    bool running() { return m_Running; }
+
+    TextureManager* textures = NULL;
 
  private:
-    SDL_Window* m_pWindow;
-    SDL_Renderer* m_pRenderer;
+    SDL_Window* m_pWindow = NULL;
+    SDL_Renderer* m_pRenderer = NULL;
 
-    bool m_bRunning;
+    bool m_Running;
 };
 
 #endif
