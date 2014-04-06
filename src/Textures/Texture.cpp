@@ -9,9 +9,9 @@
 #include <iostream>
 
 struct Texture {
-    char const *key = NULL;
-    SDL_Texture *texture = NULL;
-    json_t *info = NULL;
+    char const *key;
+    SDL_Texture *texture;
+    json_t *info;
 };
 
 #endif

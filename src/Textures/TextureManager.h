@@ -27,7 +27,7 @@ class TextureManager {
     SDL_Texture* loadImage(char const *path);
     json_t* loadJSON(char const *path);
  private:
-    SDL_Renderer *g_Renderer = NULL;
+    SDL_Renderer *g_Renderer;
     std::vector <Texture> texturesVector; // TODO: This shit doesn't feel right
 };
 
