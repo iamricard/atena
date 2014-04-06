@@ -3,10 +3,11 @@ compiler:
     - gcc
 
 before_install:
-    - sudo apt-get update
+    - sudo add-apt-repository ppa:zoogie/sdl2-snapshots
+    - sudo apt-get update -q
     - sudo apt-get install cmake
-    - sudo apt-get install libsdl2-2.0-0
-    - sudo apt-get install libsdl2-image-2.0-0
+    - sudo apt-get install libsdl2
+    - sudo apt-get install libsdl2-image
     - sudo apt-get install libbox2d2.3.0
 
     - mkdir build
