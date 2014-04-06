@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rcsole/Atena.svg?branch=master)](https://travis-ci.org/rcsole/Atena)
+
 # Atena Game Engine
 ## Sprint 1
 ### Objectives

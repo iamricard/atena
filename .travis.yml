@@ -5,12 +5,18 @@ compiler:
 before_install:
     - mkdir deps
     - cd deps
+    - wget https://box2d.googlecode.com/files/Box2D_v2.3.0.7z
+    - 7z x Box2D_v2.3.0.7z
+    - cd Box2D_v2.3.0/Box2D/Build
+    - cmake ..
+    - make
+    - sudo make install
     - sudo add-apt-repository ppa:zoogie/sdl2-snapshots -y
     - sudo apt-get update -q
     - sudo apt-get install cmake
     - sudo apt-get install libsdl2
     - sudo apt-get install libsdl2-image
-    - sudo apt-get install libbox2d
+
 
     - mkdir build
     - cd build
