@@ -28,11 +28,11 @@ class Game {
 
     bool running() { return m_Running; }
 
-    TextureManager* textures = NULL;
+    TextureManager* textures;
 
  private:
-    SDL_Window* m_pWindow = NULL;
-    SDL_Renderer* m_pRenderer = NULL;
+    SDL_Window* m_pWindow;
+    SDL_Renderer* m_pRenderer;
 
     bool m_Running;
 };
