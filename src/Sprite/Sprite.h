@@ -12,7 +12,7 @@
 
 class Sprite {
  public:
-     Sprite(char *key, Texture *texture);
+     Sprite(char *key, Texture *texture) : m_key(*key), m_texture(*texture) {}
     ~Sprite() {}
 
     void render();
