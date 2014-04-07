@@ -6,8 +6,6 @@
 #include <SDL2/SDL.h>
 #include <jansson.h>
 
-#include <iostream>
-
 struct Texture {
     char const *key;
     SDL_Texture *texture;

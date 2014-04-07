@@ -7,8 +7,8 @@ TextureManager::TextureManager(SDL_Renderer* ren) {
 }
 
 void TextureManager::render() {
+    // TODO(rcsole): this loop does not feel right either
     for (unsigned int i = 0; i != texturesVector.size(); i++) {
-    // TODO: this loop does not feel right either
         if (!texturesVector[i].info == NULL) {
             printf("%s\n", json_dumps(texturesVector[i].info, JSON_INDENT(2)));
         } else {
@@ -31,7 +31,8 @@ void TextureManager::loadTexture(char const *key,
     t.info = tmpJSON;
     t.texture = tmpTex;
 
-    texturesVector.push_back(t); // TODO: This just does not feel right, AT ALL.
+    // TODO(rcsole): This just does not feel right, AT ALL.
+    texturesVector.push_back(t);
 }
 
 SDL_Texture* TextureManager::loadImage(char const *path) {

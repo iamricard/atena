@@ -7,28 +7,28 @@
 #include <SDL2/SDL_image.h>
 #include <jansson.h>
 
-#include <iostream>
-
-#include "./Texture.cpp"
-
+#include <vector>
 #include <string>
 #include <cstdio>
-#include <vector>
 
+#include "./Texture.h"
 
 class TextureManager {
  public:
-     TextureManager(SDL_Renderer *ren);
+     explicit TextureManager(SDL_Renderer *ren);
     ~TextureManager();
 
     void render();
-    void loadTexture(char const *key, char const *pathJSON, char const *pathIMG);
+    void loadTexture(char const *key,
+                     char const *pathJSON,
+                     char const *pathIMG);
 
     SDL_Texture* loadImage(char const *path);
     json_t* loadJSON(char const *path);
  private:
     SDL_Renderer *g_Renderer;
-    std::vector <Texture> texturesVector; // TODO: This shit doesn't feel right
+    // TODO(rcsole): This shit doesn't feel right
+    std::vector <Texture> texturesVector;
 };
 
 #endif
