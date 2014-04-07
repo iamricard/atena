@@ -8,7 +8,12 @@ TextureManager::TextureManager(SDL_Renderer* ren) {
 
 void TextureManager::render() {
     for (unsigned int i = 0; i != texturesVector.size(); i++) {
-        printf("%s\n", json_dumps(texturesVector[i].info, JSON_INDENT(2)));
+    // TODO: this loop does not feel right either
+        if (!texturesVector[i].info == NULL) {
+            printf("%s\n", json_dumps(texturesVector[i].info, JSON_INDENT(2)));
+        } else {
+            printf("No JSON for texture: %s\n", texturesVector[i].key);
+        }
     }
 }
 
@@ -56,18 +61,22 @@ SDL_Texture* TextureManager::loadImage(char const *path) {
 }
 
 json_t* TextureManager::loadJSON(char const *path) {
-    FILE *p_inputFile = NULL;
-
-    json_t *jsonFile = NULL;
     json_t *root = NULL;
-    json_error_t *error = NULL;
 
-    p_inputFile = fopen(path, "r");
+    if (FILE* p_inputFile = fopen(path, "r")) {
+        printf("File exists");
+        json_t *jsonFile;
+        json_error_t *error;
 
-    jsonFile = json_loadf(p_inputFile, 0, error);
-    root = json_object_get(jsonFile, "frames");
+        jsonFile = json_loadf(p_inputFile, 0, error);
+        root = json_object_get(jsonFile, "frames");
 
-    fclose(p_inputFile);
+        fclose(p_inputFile);
+    } else {
+        printf("Error loading json %s\n", path);
+
+        return NULL;
+    }
 
     return root;
 }
