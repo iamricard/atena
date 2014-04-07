@@ -1,63 +1,91 @@
-# Locate Box2D
-# This module defines XXX_FOUND, XXX_INCLUDE_DIRS and XXX_LIBRARIES standard variables
+# - Find Box2D
+# Find the native Box2D includes and libraries
+#
+#  BOX2D_INCLUDE_DIR - where to find TmxParser/Config.hpp, etc.
+#  BOX2D_LIBRARIES   - List of libraries when using libTmxParser.
+#  BOX2D_FOUND       - True if libTmxParser found.
 
-FIND_PATH(BOX2D_INCLUDE_DIR Box2D.h
-    HINTS
-    $ENV{BOX2D_DIR}
-    $ENV{BOX2D_PATH}
-    ${ADDITIONAL_SEARCH_PATHS}
-    PATH_SUFFIXES include Include
-    PATHS
-        ~/Library/Frameworks
-        /Library/Frameworks
-        /usr/local
-        /usr
-        /sw # Fink
-        /opt/local # DarwinPorts
-        /opt/csw # Blastwave
-        /opt
-)
+if(BOX2D_INCLUDE_DIR)
+  # Already in cache, be silent
+  set(BOX2D_FIND_QUIETLY TRUE)
+endif(BOX2D_INCLUDE_DIR)
 
-FIND_LIBRARY(BOX2D_LIBRARY
-    NAMES box2d
-    HINTS
-    $ENV{BOX2D_DIR}
-    $ENV{BOX2D_PATH}
-    ${ADDITIONAL_SEARCH_PATHS}
-    PATH_SUFFIXES lib64 lib lib/release Library
-    PATHS
-        ~/Library/Frameworks
-        /Library/Frameworks
-        /usr/local
-        /usr
-        /sw
-        /opt/local
-        /opt/csw
-        /opt
-)
+find_path(BOX2D_INCLUDE_DIR Box2D/Box2D.h
+  PATH_SUFFIXES include
+  PATHS
+  ~/Library/Frameworks
+  /Library/Frameworks
+  /usr/local
+  /usr
+  /sw          # Fink
+  /opt/local   # DarwinPorts
+  /opt/csw     # Blastwave
+  /opt
+  ${BOX2DDIR}
+  $ENV{BOX2DDIR})
 
-FIND_LIBRARY(BOX2D_LIBRARY_DEBUG
-    NAMES box2dd box2d_d
-    HINTS
-    $ENV{BOX2D_DIR}
-    $ENV{BOX2D_PATH}
-    ${ADDITIONAL_SEARCH_PATHS}
-    PATH_SUFFIXES lib64 lib lib/debug Library
-    PATHS
-        ~/Library/Frameworks
-        /Library/Frameworks
-        /usr/local
-        /usr
-        /sw
-        /opt/local
-        /opt/csw
-        /opt
-)
+find_library(BOX2D_LIBRARY_DEBUG
+  Box2D-d
+  PATH_SUFFIXES lib64 lib
+  PATHS
+  ~/Library/Frameworks
+  /Library/Frameworks
+  /usr/local
+  /usr
+  /sw          # Fink
+  /opt/local   # DarwinPorts
+  /opt/csw     # Blastwave
+  /opt
+  ${BOX2DDIR}
+  $ENV{BOX2DDIR})
 
+find_library(BOX2D_LIBRARY_RELEASE
+  Box2D
+  PATH_SUFFIXES lib64 lib
+  PATHS
+  ~/Library/Frameworks
+  /Library/Frameworks
+  /usr/local
+  /usr
+  /sw          # Fink
+  /opt/local   # DarwinPorts
+  /opt/csw     # Blastwave
+  /opt
+  ${BOX2DDIR}
+  $ENV{BOX2DDIR})
 
-# handle the QUIETLY and REQUIRED arguments and set CURL_FOUND to TRUE if
-# all listed variables are TRUE
-INCLUDE(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(BOX2D DEFAULT_MSG BOX2D_LIBRARY BOX2D_INCLUDE_DIR)
-INCLUDE(FindPackageTargetLibraries)
-FIND_PACKAGE_SET_STD_INCLUDE_AND_LIBS(BOX2D)
+if(BOX2D_LIBRARY_DEBUG OR BOX2D_LIBRARY_RELEASE)
+  # Library found
+  set(BOX2D_FOUND TRUE)
+
+  # If both were found, set BOX2D_LIBRARY to the release version
+  if(BOX2D_LIBRARY_DEBUG AND BOX2D_LIBRARY_RELEASE)
+    set(BOX2D_LIBRARY ${BOX2D_LIBRARY_RELEASE})
+  endif()
+
+  if(BOX2D_LIBRARY_DEBUG AND NOT BOX2D_LIBRARY_RELEASE)
+    set(BOX2D_LIBRARY ${BOX2D_LIBRARY_DEBUG})
+  endif()
+
+  if(NOT BOX2D_LIBRARY_DEBUG AND BOX2D_LIBRARY_RELEASE)
+    set(BOX2D_LIBRARY ${BOX2D_LIBRARY_RELEASE})
+  endif()
+else()
+  set(BOX2D_FOUND FALSE)
+endif()
+
+# Handle the QUIETLY and REQUIRED arguments and set SNDFILE_FOUND to TRUE if
+# all listed variables are TRUE.
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(BOX2D DEFAULT_MSG BOX2D_LIBRARY BOX2D_INCLUDE_DIR)
+
+if(BOX2D_FOUND)
+  set(BOX2D_LIBRARIES ${BOX2D_LIBRARY})
+else(BOX2D_FOUND)
+  set(BOX2D_LIBRARIES)
+endif(BOX2D_FOUND)
+
+mark_as_advanced(BOX2D_INCLUDE_DIR
+  BOX2D_LIBRARY
+  BOX2D_LIBRARY_RELEASE
+  BOX2D_LIBRARY_DEBUG)
