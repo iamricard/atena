@@ -8,14 +8,17 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include <cstdio>
+
 #include "../Textures/Texture.h"
 
 class Sprite {
  public:
-     Sprite(char *key, Texture *texture) : m_key(*key), m_texture(*texture) {}
+     Sprite(char *key, Texture *texture, int dstX, int dstY);
     ~Sprite() {}
 
     void render();
+
  private:
     SDL_Rect m_srcRect;
     SDL_Rect m_dstRect;

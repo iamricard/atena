@@ -25,6 +25,10 @@ class TextureManager {
 
     SDL_Texture* loadImage(char const *path);
     json_t* loadJSON(char const *path);
+
+    // Texture& getTexture(char const *key);
+    void getTextureJSON(char const *key);
+
  private:
     SDL_Renderer *g_Renderer;
     // TODO(rcsole): This shit doesn't feel right

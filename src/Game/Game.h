@@ -4,6 +4,7 @@
 #define __Game__
 
 #include <SDL2/SDL.h>
+
 #include <vector>
 
 #include "../Sprite/Sprite.h"

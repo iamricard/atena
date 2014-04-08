@@ -7,19 +7,25 @@ TextureManager::TextureManager(SDL_Renderer* ren) {
 }
 
 void TextureManager::render() {
-    // TODO(rcsole): this loop does not feel right either
-    for (unsigned int i = 0; i != texturesVector.size(); i++) {
-        if (!texturesVector[i].info == NULL) {
-            printf("%s\n", json_dumps(texturesVector[i].info, JSON_INDENT(2)));
-        } else {
-            printf("No JSON for texture: %s\n", texturesVector[i].key);
-        }
+    printf("Rendering textures\n");
+
+    // this loop does not feel right either
+    // for (unsigned int i = 0; i != texturesVector.size(); i++) {
+    // this looks better?
+    for (unsigned int i = 0; i < texturesVector.size(); i++) {
+        printf("Looping\n");
+        // if (!t.info == 0) {
+        //     printf("%s\n", json_dumps(t.info, JSON_INDENT(2)));
+        // } else {
+        //     printf("No JSON for texture: %s\n", t.key);
+        // }
     }
 }
 
 void TextureManager::loadTexture(char const *key,
                                  char const *pathJSON,
                                  char const *pathIMG) {
+    printf("Loading texture\n");
     json_t *tmpJSON = NULL;
     SDL_Texture *tmpTex = NULL;
     Texture t;
@@ -33,6 +39,8 @@ void TextureManager::loadTexture(char const *key,
 
     // TODO(rcsole): This just does not feel right, AT ALL.
     texturesVector.push_back(t);
+    printf("Texture loaded\n");
+    printf("Number of textures: %zu\n", texturesVector.size());
 }
 
 SDL_Texture* TextureManager::loadImage(char const *path) {
@@ -46,6 +54,7 @@ SDL_Texture* TextureManager::loadImage(char const *path) {
                 path, IMG_GetError());
 
     } else {
+        printf("Image %s loaded\n", path);
         tmpTexture = SDL_CreateTextureFromSurface(g_Renderer, tmpSurface);
 
         if (tmpTexture == NULL) {
@@ -53,6 +62,7 @@ SDL_Texture* TextureManager::loadImage(char const *path) {
                     path, IMG_GetError());
         }
 
+        printf("Texture %s loaded\n", path);
         SDL_FreeSurface(tmpSurface);
 
         // tmpSurface = NULL;
@@ -65,7 +75,7 @@ json_t* TextureManager::loadJSON(char const *path) {
     json_t *root = NULL;
 
     if (FILE* p_inputFile = fopen(path, "r")) {
-        printf("File exists");
+        printf("File exists\n");
         json_t *jsonFile;
         json_error_t *error;
 
@@ -80,4 +90,29 @@ json_t* TextureManager::loadJSON(char const *path) {
     }
 
     return root;
+}
+
+// Texture& TextureManager::getTexture(char const *key) {
+//     Texture t;
+//     for (unsigned int i = 0; i != texturesVector.size(); i++) {
+//         if (strcmp(texturesVector[i].key, key)) {
+//             t = texturesVector[i];
+//             return t;
+//         } else {
+//             printf("No texture found with key: %s\n", key);
+//             return t;
+//         }
+//     }
+// }
+
+void TextureManager::getTextureJSON(char const *key) {
+    printf("Getting JSON\n");
+    for (unsigned int i = 0; i != texturesVector.size(); i++) {
+        printf("Looping");
+        if (strcmp(texturesVector[i].key, key)) {
+            printf("%s\n", json_dumps(texturesVector[i].info, 0));
+        } else {
+            printf("No texture found with key: %s\n", key);
+        }
+    }
 }
