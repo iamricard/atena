@@ -76,8 +76,8 @@ json_t* TextureManager::loadJSON(char const *path) {
 
     if (FILE* p_inputFile = fopen(path, "r")) {
         printf("File exists\n");
-        json_t *jsonFile;
-        json_error_t *error;
+        json_t *jsonFile = NULL;
+        json_error_t *error = NULL;
 
         jsonFile = json_loadf(p_inputFile, 0, error);
         root = json_object_get(jsonFile, "frames");
@@ -86,13 +86,13 @@ json_t* TextureManager::loadJSON(char const *path) {
     } else {
         printf("Error loading json %s\n", path);
 
-        return NULL;
+        return root;
     }
 
     return root;
 }
 
-// Texture& TextureManager::getTexture(char const *key) {
+// Texture TextureManager::getTexture(char const *key) {
 //     Texture t;
 //     for (unsigned int i = 0; i != texturesVector.size(); i++) {
 //         if (strcmp(texturesVector[i].key, key)) {
@@ -108,8 +108,9 @@ json_t* TextureManager::loadJSON(char const *path) {
 void TextureManager::getTextureJSON(char const *key) {
     printf("Getting JSON\n");
     for (unsigned int i = 0; i != texturesVector.size(); i++) {
-        printf("Looping");
-        if (strcmp(texturesVector[i].key, key)) {
+        printf("Looping\n");
+        printf("%s\n", texturesVector[i].key);
+        if (strcmp(texturesVector[i].key, key) == 0) {
             printf("%s\n", json_dumps(texturesVector[i].info, 0));
         } else {
             printf("No texture found with key: %s\n", key);

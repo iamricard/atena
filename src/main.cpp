@@ -16,10 +16,10 @@ int main(int argc, char const *argv[]) {
             SDL_WINDOW_RESIZABLE);
 
     game->textures->loadTexture("test1",
-            "assets/test1.json",
-            "assets/test1.png");
+            "../assets/test1.json",
+            "../assets/test1.png");
 
-    //game->textures->render();
+    // game->textures->render();
     game->textures->getTextureJSON("test1");
 
     while (game->running()) {
