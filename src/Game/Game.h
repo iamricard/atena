@@ -12,13 +12,16 @@
 
 class Game {
  public:
-     Game() {}
-    ~Game() {}
-
-    bool init(const char* title,
+     Game(const char* title,
             int xpos, int ypos,
             int width, int height,
             int flags);
+    ~Game() {}
+
+    // bool init(const char* title,
+    //         int xpos, int ypos,
+    //         int width, int height,
+    //         int flags);
 
     void addSprite(const char* imgUrl, int x, int y, int w, int h);
 
@@ -27,9 +30,9 @@ class Game {
     void handleEvents();
     void clean();
 
-    bool running() { return m_Running; }
+    SDL_Renderer* getRenderer();
 
-    TextureManager* textures;
+    bool running() { return m_Running; }
 
  private:
     SDL_Window* m_pWindow;

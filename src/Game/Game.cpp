@@ -3,7 +3,7 @@
 #include <cstdio>
 #include "./Game.h"
 
-bool Game::init(const char* title, int xpos, int ypos, int width,
+Game::Game(const char* title, int xpos, int ypos, int width,
                                     int height, int flags) {
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         printf("SDL_Init success\n");
@@ -22,34 +22,21 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
                 printf("SDL_CreateRenderer success\n");
                 SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
-                textures = new TextureManager(m_pRenderer);
-
-                if (textures != 0) {
-                    printf("Texture Manager success\n");
-
-                } else {
-                    printf("Texture Manager error\n");
-                    return false;
-
-                }
-
             } else {
                 printf("SDL_CreateRenderer error\n");
-                return false;
+                // return false;
             }
         } else {
             printf("SDL_CreateWindow error\n");
-            return false;
+            // return false;
         }
     } else {
         printf("SDL_Init error\n");
-        return false;
+        // return false;
     }
 
     printf("Init succes\n");
     m_Running = true;
-
-    return true;
 }
 
 void Game::render() {
@@ -76,4 +63,8 @@ void Game::handleEvents() {
                 break;
         }
     }
+}
+
+SDL_Renderer* Game::getRenderer() {
+    return m_pRenderer;
 }

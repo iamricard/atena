@@ -64,8 +64,6 @@ SDL_Texture* TextureManager::loadImage(char const *path) {
 
         printf("Texture %s loaded\n", path);
         SDL_FreeSurface(tmpSurface);
-
-        // tmpSurface = NULL;
     }
 
     return tmpTexture;
