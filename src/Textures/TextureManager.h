@@ -1,4 +1,6 @@
-// Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+/**
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ */
 
 #ifndef __TextureManager__
 #define __TextureManager__
@@ -26,13 +28,14 @@ class TextureManager {
     SDL_Texture* loadImage(char const *path);
     json_t* loadJSON(char const *path);
 
-    // Texture& getTexture(char const *key);
+    Texture* getTexture(char const *key);
     void getTextureJSON(char const *key);
 
  private:
+    // I don't think this needs to be here
     SDL_Renderer *g_Renderer;
     // TODO(rcsole): This shit doesn't feel right
-    std::vector <Texture> texturesVector;
+    std::vector <Texture*> texturesVector;
 };
 
 #endif

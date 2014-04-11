@@ -1,4 +1,6 @@
-// Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+/**
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ */
 
 #ifndef __Game__
 #define __Game__
@@ -7,9 +9,6 @@
 
 #include <vector>
 
-#include "../Sprite/Sprite.h"
-#include "../Textures/TextureManager.h"
-
 class Game {
  public:
      Game(const char* title,
@@ -17,13 +16,6 @@ class Game {
             int width, int height,
             int flags);
     ~Game() {}
-
-    // bool init(const char* title,
-    //         int xpos, int ypos,
-    //         int width, int height,
-    //         int flags);
-
-    void addSprite(const char* imgUrl, int x, int y, int w, int h);
 
     void render();
     void update();

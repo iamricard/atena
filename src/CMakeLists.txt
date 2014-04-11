@@ -4,7 +4,7 @@
 # Add subdirectories
 # add_subdirectory(External)
 add_subdirectory(Game)
-add_subdirectory(Sprite)
+add_subdirectory(Sprites)
 add_subdirectory(Textures)
 
 # Set all core libs to ${CORE_LIBS}

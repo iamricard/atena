@@ -1,4 +1,6 @@
-// Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+/**
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ */
 
 #include "./TextureManager.h"
 
@@ -7,19 +9,7 @@ TextureManager::TextureManager(SDL_Renderer* ren) {
 }
 
 void TextureManager::render() {
-    printf("Rendering textures\n");
-
-    // this loop does not feel right either
-    // for (unsigned int i = 0; i != texturesVector.size(); i++) {
-    // this looks better?
-    for (unsigned int i = 0; i < texturesVector.size(); i++) {
-        printf("Looping\n");
-        // if (!t.info == 0) {
-        //     printf("%s\n", json_dumps(t.info, JSON_INDENT(2)));
-        // } else {
-        //     printf("No JSON for texture: %s\n", t.key);
-        // }
-    }
+    // TODO(rcsole): Implement
 }
 
 void TextureManager::loadTexture(char const *key,
@@ -28,14 +18,11 @@ void TextureManager::loadTexture(char const *key,
     printf("Loading texture\n");
     json_t *tmpJSON = NULL;
     SDL_Texture *tmpTex = NULL;
-    Texture t;
 
-    tmpJSON = loadJSON(pathJSON);
     tmpTex = loadImage(pathIMG);
+    tmpJSON = loadJSON(pathJSON);
 
-    t.key = key;
-    t.info = tmpJSON;
-    t.texture = tmpTex;
+    struct Texture* t = new Texture(key, tmpTex, tmpJSON);
 
     // TODO(rcsole): This just does not feel right, AT ALL.
     texturesVector.push_back(t);
@@ -90,26 +77,27 @@ json_t* TextureManager::loadJSON(char const *path) {
     return root;
 }
 
-// Texture TextureManager::getTexture(char const *key) {
-//     Texture t;
-//     for (unsigned int i = 0; i != texturesVector.size(); i++) {
-//         if (strcmp(texturesVector[i].key, key)) {
-//             t = texturesVector[i];
-//             return t;
-//         } else {
-//             printf("No texture found with key: %s\n", key);
-//             return t;
-//         }
-//     }
-// }
+Texture* TextureManager::getTexture(char const *key) {
+    printf("Getting Texture\n");
+    Texture* t;
+    for (unsigned int i = 0; i != texturesVector.size(); i++) {
+        if (strcmp(texturesVector[i]->key, key)) {
+            t = texturesVector[i];
+            return t;
+        } else {
+            printf("No texture found with key: %s\n", key);
+            return t;
+        }
+    }
+}
 
 void TextureManager::getTextureJSON(char const *key) {
     printf("Getting JSON\n");
     for (unsigned int i = 0; i != texturesVector.size(); i++) {
         printf("Looping\n");
-        printf("%s\n", texturesVector[i].key);
-        if (strcmp(texturesVector[i].key, key) == 0) {
-            printf("%s\n", json_dumps(texturesVector[i].info, 0));
+        printf("%s\n", texturesVector[i]->key);
+        if (strcmp(texturesVector[i]->key, key) == 0) {
+            printf("%s\n", json_dumps(texturesVector[i]->info, JSON_INDENT(2)));
         } else {
             printf("No texture found with key: %s\n", key);
         }

@@ -1,4 +1,6 @@
-// Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+/**
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ */
 
 // Sprite methods and attributes
 
@@ -14,16 +16,16 @@
 
 class Sprite {
  public:
-     Sprite(char *key, Texture *texture, int dstX, int dstY);
+     Sprite(char const *key, Texture *texture, int dstX, int dstY);
     ~Sprite() {}
 
-    void render();
+    void render(SDL_Renderer* ren);
 
  private:
     SDL_Rect m_srcRect;
     SDL_Rect m_dstRect;
-    Texture &m_texture;
-    char &m_key;
+    Texture *m_Texture;
+    char const *m_key;
 };
 
 #endif

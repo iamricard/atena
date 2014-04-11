@@ -1,6 +1,9 @@
-// Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+/**
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ */
 
 #include <cstdio>
+
 #include "./Game.h"
 
 Game::Game(const char* title, int xpos, int ypos, int width,
@@ -24,15 +27,12 @@ Game::Game(const char* title, int xpos, int ypos, int width,
 
             } else {
                 printf("SDL_CreateRenderer error\n");
-                // return false;
             }
         } else {
             printf("SDL_CreateWindow error\n");
-            // return false;
         }
     } else {
         printf("SDL_Init error\n");
-        // return false;
     }
 
     printf("Init succes\n");
