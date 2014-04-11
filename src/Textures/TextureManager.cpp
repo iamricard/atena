@@ -56,6 +56,7 @@ SDL_Texture* TextureManager::loadImage(char const *path) {
     return tmpTexture;
 }
 
+// FIXME(rcsole): should not store a json_t variable, instead store everything in sprite classes?
 json_t* TextureManager::loadJSON(char const *path) {
     json_t *root = NULL;
 
@@ -81,7 +82,7 @@ Texture* TextureManager::getTexture(char const *key) {
     printf("Getting Texture\n");
     Texture* t;
     for (unsigned int i = 0; i != texturesVector.size(); i++) {
-        if (strcmp(texturesVector[i]->key, key)) {
+        if (strcmp(texturesVector[i]->getKey(), key)) {
             t = texturesVector[i];
             return t;
         } else {
@@ -95,9 +96,9 @@ void TextureManager::getTextureJSON(char const *key) {
     printf("Getting JSON\n");
     for (unsigned int i = 0; i != texturesVector.size(); i++) {
         printf("Looping\n");
-        printf("%s\n", texturesVector[i]->key);
-        if (strcmp(texturesVector[i]->key, key) == 0) {
-            printf("%s\n", json_dumps(texturesVector[i]->info, JSON_INDENT(2)));
+        printf("%s\n", texturesVector[i]->getKey());
+        if (strcmp(texturesVector[i]->getKey(), key) == 0) {
+            printf("%s\n", json_dumps(texturesVector[i]->getInfo(), JSON_INDENT(2)));
         } else {
             printf("No texture found with key: %s\n", key);
         }

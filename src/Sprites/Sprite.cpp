@@ -6,16 +6,22 @@
 
 Sprite::Sprite(char const *key, Texture *texture, int dstX, int dstY)
                 : m_key(key), m_Texture(texture) {
-        size_t i;
+        size_t i = 0;
+        size_t array_size = 0;
+        json_t* info = NULL;
+
+        info = m_Texture->getInfo();
+
+        // array_size = json_array_size(info);
 
         m_dstRect.x = dstX;
         m_dstRect.y = dstY;
 
-        for (i = 0; i < json_array_size(m_Texture->info); i++) {
+        for (i = 0; i < 5; i++) {
             char const *name = NULL;
             json_t *data = NULL;
 
-            data = json_array_get(m_Texture->info, i);
+            data = json_array_get(m_Texture->getInfo(), i);
             name = json_string_value(json_object_get(data, "filename"));
 
             if (strcmp(name, key)) {
@@ -38,9 +44,9 @@ Sprite::Sprite(char const *key, Texture *texture, int dstX, int dstY)
             }
         }
 
-        printf("%s", json_dumps(texture->info, 0));
+        printf("%s", json_dumps(texture->getInfo(), 0));
 }
 
 void Sprite::render(SDL_Renderer *ren) {
-    SDL_RenderCopy(ren, m_Texture->texture, &m_srcRect, &m_dstRect);
+    SDL_RenderCopy(ren, m_Texture->getTexture(), &m_srcRect, &m_dstRect);
 }
