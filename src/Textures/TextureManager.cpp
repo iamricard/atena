@@ -4,33 +4,24 @@
 
 #include "./TextureManager.h"
 
-TextureManager::TextureManager(SDL_Renderer* ren) {
-    g_Renderer = ren;
-}
-
-void TextureManager::render() {
-    // TODO(rcsole): Implement
-}
-
-void TextureManager::loadTexture(char const *key,
+void TextureManager::loadTexture(std::string key,
                                  char const *pathJSON,
-                                 char const *pathIMG) {
+                                 char const *pathIMG,
+                                 SDL_Renderer *ren) {
     printf("Loading texture\n");
     json_t *tmpJSON = NULL;
     SDL_Texture *tmpTex = NULL;
 
-    tmpTex = loadImage(pathIMG);
+    tmpTex = loadImage(pathIMG, ren);
     tmpJSON = loadJSON(pathJSON);
 
-    struct Texture* t = new Texture(key, tmpTex, tmpJSON);
+    Texture* t = new Texture(tmpTex, tmpJSON);
 
-    // TODO(rcsole): This just does not feel right, AT ALL.
-    texturesVector.push_back(t);
+    textures[key] = t;
     printf("Texture loaded\n");
-    printf("Number of textures: %zu\n", texturesVector.size());
 }
 
-SDL_Texture* TextureManager::loadImage(char const *path) {
+SDL_Texture* TextureManager::loadImage(char const *path, SDL_Renderer *ren) {
     SDL_Texture* tmpTexture = NULL;
     SDL_Surface* tmpSurface = NULL;
 
@@ -42,7 +33,7 @@ SDL_Texture* TextureManager::loadImage(char const *path) {
 
     } else {
         printf("Image %s loaded\n", path);
-        tmpTexture = SDL_CreateTextureFromSurface(g_Renderer, tmpSurface);
+        tmpTexture = SDL_CreateTextureFromSurface(ren, tmpSurface);
 
         if (tmpTexture == NULL) {
             printf("Error creating texture from %s: %s\n",
@@ -56,7 +47,6 @@ SDL_Texture* TextureManager::loadImage(char const *path) {
     return tmpTexture;
 }
 
-// FIXME(rcsole): should not store a json_t variable, instead store everything in sprite classes?
 json_t* TextureManager::loadJSON(char const *path) {
     json_t *root = NULL;
 
@@ -80,27 +70,5 @@ json_t* TextureManager::loadJSON(char const *path) {
 
 Texture* TextureManager::getTexture(char const *key) {
     printf("Getting Texture\n");
-    Texture* t;
-    for (unsigned int i = 0; i != texturesVector.size(); i++) {
-        if (strcmp(texturesVector[i]->getKey(), key)) {
-            t = texturesVector[i];
-            return t;
-        } else {
-            printf("No texture found with key: %s\n", key);
-            return t;
-        }
-    }
-}
-
-void TextureManager::getTextureJSON(char const *key) {
-    printf("Getting JSON\n");
-    for (unsigned int i = 0; i != texturesVector.size(); i++) {
-        printf("Looping\n");
-        printf("%s\n", texturesVector[i]->getKey());
-        if (strcmp(texturesVector[i]->getKey(), key) == 0) {
-            printf("%s\n", json_dumps(texturesVector[i]->getInfo(), JSON_INDENT(2)));
-        } else {
-            printf("No texture found with key: %s\n", key);
-        }
-    }
+    return textures[key];
 }

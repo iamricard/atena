@@ -11,7 +11,7 @@
 
 Game *game = NULL;
 TextureManager *textures = NULL;
-SpriteManager *sprites = NULL;
+// SpriteManager *sprites = NULL;
 
 int main(int argc, char const *argv[]) {
     game = new Game("Atena Game Engine v0.0.1",
@@ -19,18 +19,15 @@ int main(int argc, char const *argv[]) {
                     640, 480,
                     SDL_WINDOW_RESIZABLE);
 
-    textures = new TextureManager(game->getRenderer());
-    sprites = new SpriteManager();
+    textures = new TextureManager();
 
-    textures->loadTexture("test1", "assets/test1.json", "assets/test1.png");
-    sprites->addSprite("FRLG_Red_Back", textures->getTexture("test1"), 50, 50);
-
-    // textures->getTextureJSON("test1");
+    textures->loadTexture("test1",
+                          "assets/test1.json",
+                          "assets/test1.png",
+                          game->getRenderer());
 
     while (game->running()) {
         game->handleEvents();
-        sprites->renderSprites(game->getRenderer());
-        // game->update();
         game->render();
     }
 

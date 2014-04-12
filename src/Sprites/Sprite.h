@@ -11,12 +11,15 @@
 #include <SDL2/SDL_image.h>
 
 #include <cstdio>
+#include <string>
+#include <vector>
 
 #include "../Textures/Texture.h"
 
 class Sprite {
  public:
-     Sprite(char const *key, Texture *texture, int dstX, int dstY);
+     Sprite(std::string key, Texture *texture,
+            int dstX, int dstY);
     ~Sprite() {}
 
     void render(SDL_Renderer* ren);
@@ -25,7 +28,7 @@ class Sprite {
     SDL_Rect m_srcRect;
     SDL_Rect m_dstRect;
     Texture *m_Texture;
-    char const *m_key;
+    std::string m_key;
 };
 
 #endif

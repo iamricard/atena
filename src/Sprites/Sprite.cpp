@@ -4,47 +4,16 @@
 
 #include "./Sprite.h"
 
-Sprite::Sprite(char const *key, Texture *texture, int dstX, int dstY)
-                : m_key(key), m_Texture(texture) {
-        size_t i = 0;
-        size_t array_size = 0;
-        json_t* info = NULL;
-
-        info = m_Texture->getInfo();
-
-        // array_size = json_array_size(info);
-
-        m_dstRect.x = dstX;
-        m_dstRect.y = dstY;
-
-        for (i = 0; i < 5; i++) {
-            char const *name = NULL;
-            json_t *data = NULL;
-
-            data = json_array_get(m_Texture->getInfo(), i);
-            name = json_string_value(json_object_get(data, "filename"));
-
-            if (strcmp(name, key)) {
-                json_t *rects = NULL;
-
-                rects = json_object_get(data, "frame");
-                m_srcRect.x =
-                    static_cast<int>
-                        (json_number_value(json_object_get(rects, "x")));
-                m_srcRect.y =
-                    static_cast<int>
-                        (json_number_value(json_object_get(rects, "y")));
-
-                m_dstRect.w = m_srcRect.w =
-                    static_cast<int>
-                        (json_number_value(json_object_get(rects, "w")));
-                m_dstRect.h = m_srcRect.h =
-                    static_cast<int>
-                        (json_number_value(json_object_get(rects, "h")));
-            }
-        }
-
-        printf("%s", json_dumps(texture->getInfo(), 0));
+Sprite::Sprite(std::string key, Texture *texture,
+               int dstX, int dstY) {
+    m_Texture = texture;
+    std::vector<int> frame = m_Texture->getFrame(key);
+    m_srcRect.x = frame[0];
+    m_srcRect.x = frame[1];
+    m_dstRect.x = dstX;
+    m_dstRect.y = dstY;
+    m_srcRect.w = m_dstRect.w = frame[2];
+    m_srcRect.h = m_dstRect.h = frame[3];
 }
 
 void Sprite::render(SDL_Renderer *ren) {

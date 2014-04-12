@@ -9,7 +9,7 @@
 #include <SDL2/SDL_image.h>
 #include <jansson.h>
 
-#include <vector>
+#include <unordered_map>
 #include <string>
 #include <cstdio>
 
@@ -17,25 +17,21 @@
 
 class TextureManager {
  public:
-     explicit TextureManager(SDL_Renderer *ren);
-    ~TextureManager();
+     TextureManager() {}
+    ~TextureManager() {}
 
-    void render();
-    void loadTexture(char const *key,
+    void loadTexture(std::string key,
                      char const *pathJSON,
-                     char const *pathIMG);
-
-    SDL_Texture* loadImage(char const *path);
-    json_t* loadJSON(char const *path);
+                     char const *pathIMG,
+                     SDL_Renderer *ren);
 
     Texture* getTexture(char const *key);
-    void getTextureJSON(char const *key);
 
  private:
-    // I don't think this needs to be here
-    SDL_Renderer *g_Renderer;
-    // TODO(rcsole): This shit doesn't feel right
-    std::vector <Texture*> texturesVector;
+    SDL_Texture* loadImage(char const *path, SDL_Renderer *ren);
+    json_t* loadJSON(char const *path);
+
+    std::unordered_map <std::string, Texture*> textures;
 };
 
 #endif

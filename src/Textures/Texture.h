@@ -8,20 +8,22 @@
 #include <SDL2/SDL.h>
 #include <jansson.h>
 
+#include <unordered_map>
+#include <vector>
+#include <string>
+
+
 class Texture {
  public:
-     Texture(char const *k, SDL_Texture *t, json_t *i)
-        : key(k), texture(t), info(i) {}
+     Texture(SDL_Texture *t, json_t *json);
     ~Texture();
 
-    const char* getKey() { return key; }
-    SDL_Texture* getTexture() { return texture; }
-    json_t* getInfo() { return info; }
+    std::vector<int> getFrame(std::string key);
+    SDL_Texture* getTexture();
 
  private:
-    char const *key;
     SDL_Texture *texture;
-    json_t *info;
+    std::unordered_map<std::string, std::vector<int>> frames;
 };
 
 #endif

@@ -1,26 +1,26 @@
-/**
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
- */
+// /**
+//  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+//  */
 
-#ifndef __SpriteManager__
-#define __SpriteManager__
+// #ifndef __SpriteManager__
+// #define __SpriteManager__
 
-#include <SDL2/SDL.h>
+// #include <SDL2/SDL.h>
 
-#include <vector>
+// #include <vector>
 
-#include "./Sprite.h"
+// #include "./Sprite.h"
 
-class SpriteManager {
- public:
-     SpriteManager() {}
-    ~SpriteManager() {}
+// class SpriteManager {
+//  public:
+//      SpriteManager() {}
+//     ~SpriteManager() {}
 
-    void renderSprites(SDL_Renderer* ren);
-    void addSprite(char const *k, Texture *t, int x, int y);
+//     void renderSprites(SDL_Renderer* ren);
+//     void addSprite(char const *k, Texture *t, int x, int y);
 
- private:
-    std::vector <Sprite*> spritesVector;
-};
+//  private:
+//     std::vector <Sprite*> spritesVector;
+// };
 
-#endif
+// #endif
