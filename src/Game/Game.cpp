@@ -41,7 +41,6 @@ Game::Game(const char* title, int xpos, int ypos, int width,
 
 void Game::render() {
     SDL_RenderClear(m_pRenderer);
-    SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::clean() {

@@ -11,7 +11,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
-
+#include <iostream>
 
 class Texture {
  public:

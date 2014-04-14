@@ -13,7 +13,7 @@ Texture::Texture(SDL_Texture *t, json_t *json) {
         std::string key;
         std::vector<int> xywh;
 
-        frame = json_array_get(json, 1);
+        frame = json_array_get(json, i);
         key = std::string(
             json_string_value(json_object_get(frame, "filename")));
         coords = json_object_get(frame, "frame");
@@ -32,6 +32,7 @@ Texture::Texture(SDL_Texture *t, json_t *json) {
                 json_number_value(json_object_get(coords, "h"))));
 
         frames[key] = xywh;
+        xywh.clear();
     }
 
     texture = t;
