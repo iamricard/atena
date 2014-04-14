@@ -9,10 +9,20 @@
 
 ## How to build
 ### Linux
+#### CLI Make
 ```bash
+mkdir build
 cd build && cmake ..
 make
 ./src/Atena
+```
+
+#### Build for Code::Blocks
+```bash
+mkdir build
+cd build
+cmake .. -G "CodeBlocks - Unix Makefiles"
+codeblocks Atena.cbp
 ```
 
 ## Powered by
