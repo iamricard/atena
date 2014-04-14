@@ -7,11 +7,11 @@
 
 #include "Game/Game.h"
 #include "Textures/TextureManager.h"
-#include "Sprites/Sprite.h"
+#include "Sprites/SpriteManager.h"
 
 Game *game = NULL;
 TextureManager *textures = NULL;
-// SpriteManager *sprites = NULL;
+SpriteManager *sprites = NULL;
 
 int main(int argc, char const *argv[]) {
     game = new Game("Atena Game Engine v0.0.1",
@@ -20,13 +20,14 @@ int main(int argc, char const *argv[]) {
                     SDL_WINDOW_RESIZABLE);
 
     textures = new TextureManager();
+    sprites = new SpriteManager();
 
     textures->loadTexture("Sprites1",
                           "/home/stark/Gamedev/Atena/test_assets/Sprites1.json",
                           "/home/stark/Gamedev/Atena/test_assets/Sprites1.png",
                           game->getRenderer());
 
-    Sprite* sprite = new Sprite("bahamut.png",
+    Sprite* sprite = sprites->addSprite("bahamut.png",
                                 textures->getTexture("Sprites1"),
                                 100, 100);
 
@@ -36,7 +37,7 @@ int main(int argc, char const *argv[]) {
         // this needs to be different eventually it is this way
         // for testing purposes
         game->render();
-        sprite->render(game->getRenderer());
+        sprites->renderSprites(game->getRenderer());
         SDL_RenderPresent(game->getRenderer());
     }
 
