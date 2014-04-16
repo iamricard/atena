@@ -20,7 +20,7 @@ class TextureManager {
      TextureManager() {}
     ~TextureManager() {}
 
-    void loadTexture(std::string key,
+    Texture* loadTexture(std::string key,
                      char const *pathJSON,
                      char const *pathIMG,
                      SDL_Renderer *ren);

@@ -4,7 +4,7 @@
 
 #include "./TextureManager.h"
 
-void TextureManager::loadTexture(std::string key,
+Texture* TextureManager::loadTexture(std::string key,
                                  char const *pathJSON,
                                  char const *pathIMG,
                                  SDL_Renderer *ren) {
@@ -19,6 +19,8 @@ void TextureManager::loadTexture(std::string key,
 
     textures[key] = t;
     printf("Texture loaded\n");
+
+    return t;
 }
 
 SDL_Texture* TextureManager::loadImage(char const *path, SDL_Renderer *ren) {

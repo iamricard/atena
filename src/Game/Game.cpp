@@ -41,6 +41,9 @@ Game::Game(const char* title, int xpos, int ypos, int width,
 
 void Game::render() {
     SDL_RenderClear(m_pRenderer);
+    if (b_Sprites)
+        m_SpriteMgr->renderSprites(m_pRenderer);
+    SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::clean() {
@@ -64,6 +67,23 @@ void Game::handleEvents() {
     }
 }
 
-SDL_Renderer* Game::getRenderer() {
-    return m_pRenderer;
+void Game::enableSprites() {
+    b_Sprites = true;
+    m_SpriteMgr = new SpriteManager();
+}
+
+void Game::enableTextures() {
+    b_Textures = true;
+    m_TextureMgr = new TextureManager();
+}
+
+Sprite* Game::addSprite(std::string k, Texture *t, int x, int y) {
+    Sprite* s;
+    if (b_Sprites) {
+        s = m_SpriteMgr->addSprite(k, t, x, y);
+        return s;
+    } else {
+        printf("Sprites not enabled, make sure you did game->enableSprites()");
+        return s;
+    }
 }

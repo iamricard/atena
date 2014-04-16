@@ -18,27 +18,22 @@ int main(int argc, char const *argv[]) {
                     100, 100,
                     640, 480,
                     SDL_WINDOW_RESIZABLE);
+    game->enableSprites();
 
     textures = new TextureManager();
-    sprites = new SpriteManager();
 
     textures->loadTexture("Sprites1",
                           "/home/stark/Gamedev/Atena/test_assets/Sprites1.json",
                           "/home/stark/Gamedev/Atena/test_assets/Sprites1.png",
                           game->getRenderer());
 
-    Sprite* sprite = sprites->addSprite("bahamut.png",
+    Sprite* sprite = game->addSprite("bahamut.png",
                                 textures->getTexture("Sprites1"),
                                 100, 100);
 
     while (game->running()) {
         game->handleEvents();
-
-        // this needs to be different eventually it is this way
-        // for testing purposes
         game->render();
-        sprites->renderSprites(game->getRenderer());
-        SDL_RenderPresent(game->getRenderer());
     }
 
     game->clean();
