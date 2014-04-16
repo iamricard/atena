@@ -43,8 +43,8 @@ class Game {
     TextureManager* m_TextureMgr;
 
     bool m_Running;
-    bool b_Sprites = false;
-    bool b_Textures = false;
+    bool b_Sprites;
+    bool b_Textures;
 };
 
 #endif
