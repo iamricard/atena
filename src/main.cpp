@@ -6,8 +6,6 @@
 #include <cstdio>
 
 #include "Game/Game.h"
-#include "Textures/TextureManager.h"
-#include "Sprites/SpriteManager.h"
 
 Game *game = NULL;
 TextureManager *textures = NULL;
@@ -19,17 +17,16 @@ int main(int argc, char const *argv[]) {
                     640, 480,
                     SDL_WINDOW_RESIZABLE);
     game->enableSprites();
+    game->enableTextures();
 
-    textures = new TextureManager();
+    game->loadTexture("Sprites1",
+                      "/home/stark/Gamedev/Atena/test_assets/Sprites1.json",
+                      "/home/stark/Gamedev/Atena/test_assets/Sprites1.png",
+                      game->getRenderer());
 
-    textures->loadTexture("Sprites1",
-                          "/home/stark/Gamedev/Atena/test_assets/Sprites1.json",
-                          "/home/stark/Gamedev/Atena/test_assets/Sprites1.png",
-                          game->getRenderer());
-
-    Sprite* sprite = game->addSprite("bahamut.png",
-                                textures->getTexture("Sprites1"),
-                                100, 100);
+    game->addSprite("bahamut.png",
+                    game->getTexture("Sprites1"),
+                    100, 100);
 
     while (game->running()) {
         game->handleEvents();

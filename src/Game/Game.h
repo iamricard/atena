@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "../Textures/TextureManager.h"
+#include "../Textures/Texture.h"
 #include "../Sprites/SpriteManager.h"
 #include "../Sprites/Sprite.h"
 
@@ -30,7 +31,12 @@ class Game {
     void enableTextures();
 
     Sprite* addSprite(std::string k, Texture *t, int x, int y);
-    // Texture* loadTexture();
+
+    Texture* loadTexture(std::string key,
+                         char const *pathJSON,
+                         char const *pathIMG,
+                         SDL_Renderer *ren);
+    Texture* getTexture(char const *key);
 
     SDL_Renderer* getRenderer() { return m_pRenderer; }
     bool running() { return m_Running; }

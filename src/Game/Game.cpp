@@ -78,12 +78,37 @@ void Game::enableTextures() {
 }
 
 Sprite* Game::addSprite(std::string k, Texture *t, int x, int y) {
-    Sprite* s;
+    Sprite* s = NULL;
     if (b_Sprites) {
         s = m_SpriteMgr->addSprite(k, t, x, y);
         return s;
     } else {
-        printf("Sprites not enabled, make sure you did game->enableSprites()");
+        printf("Sprites disabled, make sure you did game->enableSprites()");
         return s;
+    }
+}
+
+Texture* Game::loadTexture(std::string key,
+                            char const *pathJSON,
+                            char const *pathIMG,
+                            SDL_Renderer *ren) {
+    Texture* t = NULL;
+    if (b_Textures) {
+        t = m_TextureMgr->loadTexture(key, pathJSON, pathIMG, ren);
+        return t;
+    } else {
+        printf("Textures disabled, make sure you did game->enableTextures()");
+        return t;
+    }
+}
+
+Texture* Game::getTexture(char const *key) {
+    Texture* t = NULL;
+    if (b_Textures) {
+        t = m_TextureMgr->getTexture(key);
+        return t;
+    } else {
+        printf("Textures disabled, make sure you did game->enableTextures()");
+        return t;
     }
 }
