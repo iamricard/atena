@@ -41,6 +41,11 @@ Game::Game(const char* title, int xpos, int ypos, int width,
 
 void Game::render() {
     SDL_RenderClear(m_pRenderer);
+    // @todo(rcsole): this is here for testing purposes, but it is not right
+    AGETextures::Instance()->drawFrame("Sprites1",
+                                        "bahamut.png",
+                                        100, 100,
+                                        m_pRenderer);
     SDL_RenderPresent(m_pRenderer);
 }
 

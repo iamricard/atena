@@ -17,7 +17,6 @@
 
 class TextureManager {
  public:
-    typedef TextureManager AGETextures;
     static TextureManager* Instance() {
         if (s_pInstance == 0) {
             s_pInstance = new TextureManager();
@@ -57,4 +56,5 @@ class TextureManager {
     static TextureManager* s_pInstance;
 };
 
+typedef TextureManager AGETextures;
 #endif
