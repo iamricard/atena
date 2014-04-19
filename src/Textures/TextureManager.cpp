@@ -4,23 +4,100 @@
 
 #include "./TextureManager.h"
 
-Texture* TextureManager::loadTexture(std::string key,
-                                 char const *pathJSON,
-                                 char const *pathIMG,
-                                 SDL_Renderer *ren) {
-    printf("Loading texture\n");
+TextureManager* TextureManager::s_pInstance = 0;
+
+void TextureManager::drawFrame(std::string texture_key, std::string frame_key,
+                               int x, int y,
+                               SDL_Renderer* pRenderer) {
+    std::vector<int> coords = m_textureMap[texture_key]->getFrame(frame_key);
+
+    SDL_Rect srcRect;
+    SDL_Rect dstRect;
+
+    srcRect.x = coords[0];
+    srcRect.y = coords[1];
+    srcRect.w = dstRect.w = coords[2];
+    srcRect.h = dstRect.h = coords[3];
+    dstRect.x = x;
+    dstRect.y = y;
+
+    SDL_RenderCopyEx(pRenderer,
+                     m_textureMap[texture_key]->getTexture(),
+                     &srcRect, &dstRect,
+                     0, 0,
+                     SDL_FLIP_NONE);
+}
+
+void TextureManager::drawFrame(std::string texture_key,
+                               int x, int y,
+                               int width, int height,
+                               int row, int frame,
+                               SDL_Renderer* pRenderer) {
+    SDL_Rect srcRect;
+    SDL_Rect dstRect;
+
+    srcRect.x = width * frame;
+    srcRect.y = height * (row - 1);
+    srcRect.w = dstRect.w = width;
+    srcRect.h = dstRect.h = height;
+    dstRect.x = x;
+    dstRect.y = y;
+
+    SDL_RenderCopyEx(pRenderer,
+                     m_textureMap[texture_key]->getTexture(),
+                     &srcRect, &dstRect,
+                     0, 0,
+                     SDL_FLIP_NONE);
+}
+
+void TextureManager::draw(std::string texture_key,
+                          int x, int y,
+                          int width, int height,
+                          SDL_Renderer* pRenderer) {
+    SDL_Rect srcRect;
+    SDL_Rect dstRect;
+
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = dstRect.w = width;
+    srcRect.h = dstRect.h = height;
+    dstRect.x = x;
+    dstRect.y = y;
+
+    SDL_RenderCopyEx(pRenderer,
+                     m_textureMap[texture_key]->getTexture(),
+                     &srcRect, &dstRect,
+                     0, 0,
+                     SDL_FLIP_NONE);
+}
+
+bool TextureManager::load(std::string key, std::string pathIMG,
+                          SDL_Renderer *ren) {
+    SDL_Texture *tmpTex = NULL;
+    tmpTex = loadImage(pathIMG.c_str(), ren);
+
+    Texture *t = new Texture(tmpTex);
+
+    m_textureMap[key] = t;
+
+    return true;
+}
+
+bool TextureManager::load(std::string key,
+                          std::string pathJSON,
+                          std::string pathIMG,
+                          SDL_Renderer *ren) {
     json_t *tmpJSON = NULL;
     SDL_Texture *tmpTex = NULL;
 
-    tmpTex = loadImage(pathIMG, ren);
-    tmpJSON = loadJSON(pathJSON);
+    tmpTex = loadImage(pathIMG.c_str(), ren);
+    tmpJSON = loadJSON(pathJSON.c_str());
 
     Texture* t = new Texture(tmpTex, tmpJSON);
 
-    textures[key] = t;
-    printf("Texture loaded\n");
+    m_textureMap[key] = t;
 
-    return t;
+    return true;
 }
 
 SDL_Texture* TextureManager::loadImage(char const *path, SDL_Renderer *ren) {
@@ -68,9 +145,4 @@ json_t* TextureManager::loadJSON(char const *path) {
     }
 
     return root;
-}
-
-Texture* TextureManager::getTexture(char const *key) {
-    printf("Getting Texture\n");
-    return textures[key];
 }

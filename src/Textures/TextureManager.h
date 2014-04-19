@@ -17,21 +17,44 @@
 
 class TextureManager {
  public:
+    typedef TextureManager AGETextures;
+    static TextureManager* Instance() {
+        if (s_pInstance == 0) {
+            s_pInstance = new TextureManager();
+            return s_pInstance;
+        }
+
+        return s_pInstance;
+    }
+
+    bool load(std::string key, std::string pathJSON, std::string pathIMG,
+              SDL_Renderer *ren);
+    bool load(std::string key, std::string pathIMG,
+              SDL_Renderer *ren);
+
+    void drawFrame(std::string texture_key, std::string frame_key,
+                   int x, int y,
+                   SDL_Renderer *pRenderer);
+    void drawFrame(std::string texture_key,
+                   int x, int y,
+                   int witdh, int height,
+                   int row, int frame,
+                   SDL_Renderer *pRenderer);
+    void draw(std::string texture_key,
+              int x, int y,
+              int width, int height,
+              SDL_Renderer *pRenderer);
+
+ private:
      TextureManager() {}
     ~TextureManager() {}
 
-    Texture* loadTexture(std::string key,
-                     char const *pathJSON,
-                     char const *pathIMG,
-                     SDL_Renderer *ren);
-
-    Texture* getTexture(char const *key);
-
- private:
     SDL_Texture* loadImage(char const *path, SDL_Renderer *ren);
     json_t* loadJSON(char const *path);
 
-    std::unordered_map <std::string, Texture*> textures;
+    std::unordered_map <std::string, Texture*> m_textureMap;
+
+    static TextureManager* s_pInstance;
 };
 
 #endif
