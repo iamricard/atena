@@ -7,21 +7,19 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-
-#include <cstdio>
 #include <string>
-#include <vector>
-
-#include "../Textures/Texture.h"
 
 class GameObject {
  public:
-     GameObject(std::string f_key, std::string t_key, int dstX, int dstY);
+     GameObject(std::string f_key, std::string t_key,
+                int frames,
+                int dstX, int dstY);
     ~GameObject() {}
 
  private:
-    SDL_Rect m_srcRect;
-    SDL_Rect m_dstRect;
+    int x;
+    int y;
+    int frames;
     std::string texture_key;
     std::string frame_key;
 };

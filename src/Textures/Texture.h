@@ -11,10 +11,10 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
-#include <iostream>
 
 class Texture {
  public:
+     explicit Texture(SDL_Texture *t) : texture(t) {}
      Texture(SDL_Texture *t, json_t *json);
     ~Texture();
 
