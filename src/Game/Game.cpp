@@ -41,8 +41,6 @@ Game::Game(const char* title, int xpos, int ypos, int width,
 
 void Game::render() {
     SDL_RenderClear(m_pRenderer);
-    if (b_Sprites)
-        m_SpriteMgr->renderSprites(m_pRenderer);
     SDL_RenderPresent(m_pRenderer);
 }
 
@@ -64,51 +62,5 @@ void Game::handleEvents() {
             default:
                 break;
         }
-    }
-}
-
-void Game::enableSprites() {
-    b_Sprites = true;
-    m_SpriteMgr = new SpriteManager();
-}
-
-void Game::enableTextures() {
-    b_Textures = true;
-    m_TextureMgr = new TextureManager();
-}
-
-Sprite* Game::addSprite(std::string k, Texture *t, int x, int y) {
-    Sprite* s = NULL;
-    if (b_Sprites) {
-        s = m_SpriteMgr->addSprite(k, t, x, y);
-        return s;
-    } else {
-        printf("Sprites disabled, make sure you did game->enableSprites()");
-        return s;
-    }
-}
-
-Texture* Game::loadTexture(std::string key,
-                            char const *pathJSON,
-                            char const *pathIMG,
-                            SDL_Renderer *ren) {
-    Texture* t = NULL;
-    if (b_Textures) {
-        t = m_TextureMgr->loadTexture(key, pathJSON, pathIMG, ren);
-        return t;
-    } else {
-        printf("Textures disabled, make sure you did game->enableTextures()");
-        return t;
-    }
-}
-
-Texture* Game::getTexture(char const *key) {
-    Texture* t = NULL;
-    if (b_Textures) {
-        t = m_TextureMgr->getTexture(key);
-        return t;
-    } else {
-        printf("Textures disabled, make sure you did game->enableTextures()");
-        return t;
     }
 }

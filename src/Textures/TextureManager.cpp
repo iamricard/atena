@@ -86,8 +86,3 @@ json_t* TextureManager::loadJSON(char const *path) {
 
     return root;
 }
-
-Texture* TextureManager::getTexture(char const *key) {
-    printf("Getting Texture\n");
-    return textures[key];
-}

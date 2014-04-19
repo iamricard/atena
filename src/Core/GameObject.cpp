@@ -2,10 +2,11 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
-#include "./Sprite.h"
+#include "./GameObject.h"
 
-GameObject::GameObject(std::string f_key, std::string t_key,
-               int dstX, int dstY) {
+GameObject::GameObject(std::string f_key,
+                       std::string t_key,
+                       int dstX, int dstY) {
     frame_key = f_key;
     texture_key = texture_key;
     // m_srcRect.x = frame[0];

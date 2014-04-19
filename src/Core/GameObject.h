@@ -16,8 +16,7 @@
 
 class GameObject {
  public:
-     GameObject(std::string key, Texture *texture,
-            int dstX, int dstY);
+     GameObject(std::string f_key, std::string t_key, int dstX, int dstY);
     ~GameObject() {}
 
  private:
