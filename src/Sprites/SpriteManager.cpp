@@ -10,7 +10,6 @@ void SpriteManager::renderSprites(SDL_Renderer* ren) {
     }
 }
 
-// TODO(rcsole): Maybe this should return the sprite object
 Sprite* SpriteManager::addSprite(std::string k, Texture *t, int x, int y) {
     Sprite *s = new Sprite(k, t, x, y);
     spritesVector.push_back(s);

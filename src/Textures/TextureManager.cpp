@@ -4,10 +4,27 @@
 
 #include "./TextureManager.h"
 
-Texture* TextureManager::loadTexture(std::string key,
-                                 char const *pathJSON,
-                                 char const *pathIMG,
-                                 SDL_Renderer *ren) {
+void TextureManager::drawFrame(std::string texture_key,
+               int x, int y,
+               int witdh, int height,
+               int row, int frame) {
+    // @todo(rcsole): implement
+}
+
+void drawKey(std::string texture_key, std::string frame_key) {
+    // @todo(rcsole): implement
+}
+
+void draw(std::string texture_key,
+          int x, int y,
+          int width, int height) {
+    // @todo(rcsole): implement
+}
+
+bool TextureManager::load(std::string key,
+                          char const *pathJSON,
+                          char const *pathIMG,
+                          SDL_Renderer *ren) {
     printf("Loading texture\n");
     json_t *tmpJSON = NULL;
     SDL_Texture *tmpTex = NULL;

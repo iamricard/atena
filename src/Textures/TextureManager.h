@@ -20,12 +20,17 @@ class TextureManager {
      TextureManager() {}
     ~TextureManager() {}
 
-    Texture* loadTexture(std::string key,
-                     char const *pathJSON,
-                     char const *pathIMG,
-                     SDL_Renderer *ren);
+    bool load(std::string key, char const *pathJSON, char const *pathIMG,
+              SDL_Renderer *ren);
 
-    Texture* getTexture(char const *key);
+    void drawFrame(std::string texture_key,
+                   int x, int y,
+                   int witdh, int height,
+                   int row, int frame);
+    void drawKey(std::string texture_key, std::string frame_key);
+    void draw(std::string texture_key,
+              int x, int y,
+              int width, int height);
 
  private:
     SDL_Texture* loadImage(char const *path, SDL_Renderer *ren);
