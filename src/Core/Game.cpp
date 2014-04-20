@@ -10,7 +10,10 @@
 #include "./Game.h"
 
 Game* Game::s_pInstance = 0;
-Game::Game(): m_pWindow(0), m_pRenderer(0), m_Running(false) {}
+Game::Game():
+    m_pWindow(0),
+    m_pRenderer(0),
+    m_Running(false) {}
 
 bool Game::init(const char* title, int xpos, int ypos, int width,
                                     int height, int flags) {

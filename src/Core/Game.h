@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "../Textures/TextureManager.h"
-#include "../Textures/Texture.h"
+#include "./InputHandler.h"
 
 class Game {
  public:

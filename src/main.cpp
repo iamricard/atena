@@ -14,6 +14,7 @@ int main(int argc, char const *argv[]) {
     Uint32 frameStart, frameTime;
     if (AGEGame::Instance()->init("Atena Game Engine v0.0.1",
                                 100, 100, 640, 480, 0)) {
+        AGEInput::Instance()->initialiseJoysticks();
         AGETextures::Instance()->load("Sprites1",
                           "/home/stark/Gamedev/Atena/test_assets/Sprites1.json",
                           "/home/stark/Gamedev/Atena/test_assets/Sprites1.png",
