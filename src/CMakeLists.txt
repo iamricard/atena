@@ -4,11 +4,13 @@
 # Add subdirectories
 # add_subdirectory(External)
 add_subdirectory(Core)
+add_subdirectory(Utils)
 add_subdirectory(Textures)
 
 # Set all core libs to ${CORE_LIBS}
 set(CORE_LIBS
-    core
+    CORE
+    UTILS
     texmgr
 
     jansson

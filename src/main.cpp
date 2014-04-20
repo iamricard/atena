@@ -5,7 +5,7 @@
 #include <jansson.h>
 #include <cstdio>
 
-#include "Game/Game.h"
+#include "Core/Game.h"
 
 const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;

@@ -1,4 +1,7 @@
 /**
+ * Atena Game Engine
+ * Texture.h
+ *
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 

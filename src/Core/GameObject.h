@@ -1,4 +1,7 @@
 /**
+ * Atena Game Engine
+ * GameObject.h
+ *
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
@@ -9,19 +12,19 @@
 #include <SDL2/SDL_image.h>
 #include <string>
 
+#include "../Textures/TextureManager.h"
+#include "../Utils/LoaderParams.h"
+#include "../Utils/Vector2D.h"
+
 class GameObject {
  public:
-     GameObject(std::string f_key, std::string t_key,
-                int frames,
-                int dstX, int dstY);
-    ~GameObject() {}
+    virtual void draw()=0;
+    virtual void update()=0;
+    virtual void clean()=0;
 
- private:
-    int x;
-    int y;
-    int frames;
-    std::string texture_key;
-    std::string frame_key;
+ protected:
+    GameObject(const LoaderParams *pParams) {}
+    virtual ~GameObject() {}
 };
 
 #endif

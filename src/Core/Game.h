@@ -1,4 +1,7 @@
 /**
+ * Atena Game Engine
+ * Game.h
+ *
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
@@ -17,7 +20,6 @@ class Game {
     static Game* Instance() {
         if (s_pInstance == 0) {
             s_pInstance = new Game();
-            return s_pInstance;
         }
 
         return s_pInstance;
