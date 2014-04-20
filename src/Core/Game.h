@@ -14,12 +14,19 @@
 
 class Game {
  public:
-     Game(const char* title,
+    static Game* Instance() {
+        if (s_pInstance == 0) {
+            s_pInstance = new Game();
+            return s_pInstance;
+        }
+
+        return s_pInstance;
+    }
+
+    bool init(const char* title,
             int xpos, int ypos,
             int width, int height,
             int flags);
-    ~Game() {}
-
     void render();
     void update();
     void handleEvents();
@@ -28,14 +35,19 @@ class Game {
     void enableSprites();
     void enableTextures();
 
-    SDL_Renderer* getRenderer() { return m_pRenderer; }
+    SDL_Renderer* getRenderer() const { return m_pRenderer; }
     bool running() { return m_Running; }
 
  private:
+     Game();
+    ~Game() {}
+    static Game *s_pInstance;
+
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
 
     bool m_Running;
 };
 
+typedef Game AGEGame;
 #endif
