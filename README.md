@@ -3,12 +3,21 @@
 # Atena Game Engine
 ## Sprint 1
 ### Objectives
-* Basic sprite manager
-* Basic input manager
-* Basic texture manager
+* Game Object Factory
+* Input Handler
+* Texture Manager **(done)**
 
 ## How to build
 ### Linux
+#### Dependencies
+* CMake
+* SDL2
+* SDL2_image
+* Box2D
+* Jansson
+
+*You can follow the steps in .travis.yml to install the dependencies*
+
 #### CLI Make
 ```bash
 mkdir build
