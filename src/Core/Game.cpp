@@ -1,4 +1,7 @@
 /**
+ * Atena Game Engine
+ * Game.cpp
+ *
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
@@ -6,7 +9,10 @@
 
 #include "./Game.h"
 
-Game::Game(const char* title, int xpos, int ypos, int width,
+Game* Game::s_pInstance = 0;
+Game::Game(): m_pWindow(0), m_pRenderer(0), m_Running(false) {}
+
+bool Game::init(const char* title, int xpos, int ypos, int width,
                                     int height, int flags) {
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         printf("SDL_Init success\n");
@@ -41,6 +47,11 @@ Game::Game(const char* title, int xpos, int ypos, int width,
 
 void Game::render() {
     SDL_RenderClear(m_pRenderer);
+    // @todo(rcsole): this is here for testing purposes, but it is not right
+    AGETextures::Instance()->drawFrame("Sprites1",
+                                       "bahamut.png",
+                                       100, 100,
+                                       m_pRenderer);
     SDL_RenderPresent(m_pRenderer);
 }
 

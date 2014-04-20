@@ -2,6 +2,6 @@
 # Date: 30 March 2014
 
 # GLOB all files in current directory
-file(GLOB GAME_SRCS *.cpp *.h)
+file(GLOB CORE_SRCS *.cpp *.h)
 
-add_library(core ${GAME_SRCS})
+add_library(CORE ${CORE_SRCS})
