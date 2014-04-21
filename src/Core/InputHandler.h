@@ -11,10 +11,12 @@
 #include <SDL2/SDL.h>
 #include <vector>
 
+#include "./Game.h"
+
 class InputHandler {
  public:
     static InputHandler* Instance() {
-        if (s_pInstance = 0) {
+        if (s_pInstance == 0) {
             s_pInstance = new InputHandler();
         }
 
@@ -28,7 +30,7 @@ class InputHandler {
     bool joysticksInitialised() { return m_bJoysticksInitialised; }
 
  private:
-    InputHandler();
+    InputHandler() {}
     ~InputHandler() {}
 
     std::vector<SDL_Joystick*> m_joysticks;

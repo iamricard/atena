@@ -34,6 +34,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
                 printf("SDL_CreateRenderer success\n");
                 SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
+                AGEInput::Instance()->initialiseJoysticks();
+
             } else {
                 printf("SDL_CreateRenderer error\n");
             }
@@ -60,21 +62,25 @@ void Game::render() {
 
 void Game::clean() {
     printf("Cleaning game\n");
+
+    AGEInput::Instance()->clean();
+
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();
 }
 
 void Game::handleEvents() {
-    SDL_Event event;
-    if (SDL_PollEvent(&event)) {
-        switch (event.type) {
-            case SDL_QUIT:
-                m_Running = false;
-                break;
+    AGEInput::Instance()->update();
+    // SDL_Event event;
+    // if (SDL_PollEvent(&event)) {
+    //     switch (event.type) {
+    //         case SDL_QUIT:
+    //             m_Running = false;
+    //             break;
 
-            default:
-                break;
-        }
-    }
+    //         default:
+    //             break;
+    //     }
+    // }
 }

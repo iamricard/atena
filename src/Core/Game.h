@@ -33,6 +33,7 @@ class Game {
     void update();
     void handleEvents();
     void clean();
+    void quit() { m_Running = false; }
 
     void enableSprites();
     void enableTextures();
