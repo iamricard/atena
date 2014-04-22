@@ -14,15 +14,12 @@
 #include "./GameObject.h"
 #include "./InputHandler.h"
 
+class GameObject;
+
 class Game {
  public:
-    static Game* Instance() {
-        if (s_pInstance == 0) {
-            s_pInstance = new Game();
-        }
-
-        return s_pInstance;
-    }
+     Game();
+    ~Game() {}
 
     bool init(const char* title,
             int xpos, int ypos,
@@ -40,8 +37,6 @@ class Game {
     bool running() { return m_Running; }
 
  private:
-     Game();
-    ~Game() {}
     static Game *s_pInstance;
 
     SDL_Window* m_pWindow;

@@ -35,6 +35,8 @@ class GameObject {
     int m_row;
     int m_frame;
 
+    bool m_json;
+
     std::string m_textureKey;
     std::string m_frameKey;
 };

@@ -36,6 +36,8 @@ Texture::Texture(SDL_Texture *t, json_t *json) {
 
         frames[key] = xywh;
         xywh.clear();
+
+        printf("%s loaded\n", key.c_str());
     }
 
     texture = t;

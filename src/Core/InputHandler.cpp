@@ -6,11 +6,11 @@
  */
 
 #include "./InputHandler.h"
-#include "./Game.h"
 
 InputHandler* InputHandler::s_pInstance = 0;
 
-void InputHandler::initialiseJoysticks() {
+void InputHandler::init(Game *game) {
+    g_pGame = game;
     if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0) {
         SDL_InitSubSystem(SDL_INIT_JOYSTICK);
     }
@@ -54,7 +54,7 @@ void InputHandler::update() {
 
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
-            AGEGame::Instance()->quit();
+            g_pGame->quit();
         }
 
         if (event.type == SDL_JOYAXISMOTION) {

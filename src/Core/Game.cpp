@@ -10,7 +10,7 @@
 #include "../Examples/Bahamut.h"
 
 Game* Game::s_pInstance = 0;
-Game::Game():
+Game::Game() :
     m_pWindow(0),
     m_pRenderer(0),
     m_Running(false) {}
@@ -34,8 +34,6 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
                 printf("SDL_CreateRenderer success\n");
                 SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
-                AGEInput::Instance()->initialiseJoysticks();
-
             } else {
                 printf("SDL_CreateRenderer error\n");
             }
@@ -49,8 +47,9 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     printf("Init succes\n");
     m_Running = true;
 
-    m_gameObjects.push_back(
-        new Bahamut(new LoaderParams("Sprites1", "Bahamut", 100, 100)));
+    LoaderParams *p = new LoaderParams("Sprites1", "bahamut", 100, 100);
+    Bahamut *b = new Bahamut(p);
+    m_gameObjects.push_back(b);
 }
 
 void Game::render() {

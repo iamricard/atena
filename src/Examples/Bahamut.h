@@ -16,12 +16,11 @@ class Bahamut : public GameObject {
 
     void draw(SDL_Renderer *ren) {
         GameObject::draw(ren);
-        printf("Drawing Bahamut");
     }
 
     void update() {}
     void clean() {
         GameObject::clean();
-        printf("Cleaning Bahamut");
+        printf("Cleaning Bahamut\n");
     }
 };
