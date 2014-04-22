@@ -9,10 +9,9 @@
 #define __Game__
 
 #include <SDL2/SDL.h>
-
 #include <vector>
 
-#include "../Textures/TextureManager.h"
+#include "./GameObject.h"
 #include "./InputHandler.h"
 
 class Game {
@@ -35,8 +34,7 @@ class Game {
     void clean();
     void quit() { m_Running = false; }
 
-    void enableSprites();
-    void enableTextures();
+    void drawGameObjects();
 
     SDL_Renderer* getRenderer() const { return m_pRenderer; }
     bool running() { return m_Running; }
@@ -50,6 +48,8 @@ class Game {
     SDL_Renderer* m_pRenderer;
 
     bool m_Running;
+
+    std::vector<GameObject*> m_gameObjects;
 };
 
 typedef Game AGEGame;

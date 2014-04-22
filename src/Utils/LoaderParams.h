@@ -5,12 +5,11 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
+#ifndef __LOADERPARAMS__
+#define __LOADERPARAMS__
+
 class LoaderParams {
  public:
-    // virtual void load(std::string t_key, std::string f_key,
-    //                 int frames,
-    //                 int dstX, int dstY)=0;
-    // virtual void load(std::string t_key, int dstX, int dstY, int w, int h)=0;
     LoaderParams(std::string t_key, int x, int y, int w, int h) :
         texture_key(t_key),
         frame_key(""),
@@ -48,3 +47,5 @@ class LoaderParams {
     std::string texture_key;
     std::string frame_key;
 };
+
+#endif

@@ -6,6 +6,7 @@
  */
 
 #include "./InputHandler.h"
+#include "./Game.h"
 
 InputHandler* InputHandler::s_pInstance = 0;
 
@@ -19,8 +20,13 @@ void InputHandler::initialiseJoysticks() {
             SDL_Joystick* joy = SDL_JoystickOpen(i);
 
             if (joy != NULL) {
-                printf("Initialised one gamepad\n");
+                printf("Initialised one gamepad:\n\t * %s\n",
+                    SDL_GameControllerNameForIndex(i));
+
                 m_joysticks.push_back(joy);
+                m_joystickValues.push_back(
+                    std::make_pair(new Vector2D(0, 0), new Vector2D(0, 0)));
+
             } else {
                 printf("%s", SDL_GetError());
             }
@@ -50,5 +56,93 @@ void InputHandler::update() {
         if (event.type == SDL_QUIT) {
             AGEGame::Instance()->quit();
         }
+
+        if (event.type == SDL_JOYAXISMOTION) {
+            int which = event.jaxis.which;
+
+            /*
+             * LEFT STICK X-AXIS
+             */
+            if (event.jaxis.axis == 0) {
+                if (event.jaxis.value > m_joystickDeadZone) {
+                    printf("left stick moving right\n");
+                    m_joystickValues[which].first->setX(1);
+                } else if (event.jaxis.value < -m_joystickDeadZone) {
+                    printf("left stick moving left\n");
+                    m_joystickValues[which].first->setX(-1);
+                } else {
+                    m_joystickValues[which].first->setX(0);
+                }
+            }
+
+            /*
+             * LEFT STICK Y-AXIS
+             */
+            if (event.jaxis.axis == 1) {
+                if (event.jaxis.value > m_joystickDeadZone) {
+                    printf("left stick moving down\n");
+                    m_joystickValues[which].first->setY(1);
+                } else if (event.jaxis.value < -m_joystickDeadZone) {
+                    printf("left stick moving up\n");
+                    m_joystickValues[which].first->setY(-1);
+                } else {
+                    m_joystickValues[which].first->setY(0);
+                }
+            }
+
+            /*
+             * RIGHT STICK X-AXIS
+             */
+            if (event.jaxis.axis == 3) {
+                if (event.jaxis.value > m_joystickDeadZone) {
+                    printf("right stick moving right\n");
+                    m_joystickValues[which].first->setX(1);
+                } else if (event.jaxis.value < -m_joystickDeadZone) {
+                    printf("right stick moving left\n");
+                    m_joystickValues[which].first->setX(-1);
+                } else {
+                    m_joystickValues[which].first->setX(0);
+                }
+            }
+
+            /*
+             * RIGHT STICK Y-AXIS
+             */
+            if (event.jaxis.axis == 4) {
+                if (event.jaxis.value > m_joystickDeadZone) {
+                    printf("right stick moving down\n");
+                    m_joystickValues[which].first->setY(1);
+                } else if (event.jaxis.value < -m_joystickDeadZone) {
+                    printf("right stick moving up\n");
+                    m_joystickValues[which].first->setY(-1);
+                } else {
+                    m_joystickValues[which].first->setY(0);
+                }
+            }
+        }
     }
+}
+
+int InputHandler::getXAxis(int pad, int stick) const {
+    if (m_joystickValues.size() > 0) {
+        if (stick == 1) {
+            return m_joystickValues[pad].first->getX();
+        } else if (stick == 2) {
+            return m_joystickValues[pad].second->getX();
+        }
+    }
+
+    return 0;
+}
+
+int InputHandler::getYAxis(int pad, int stick) const {
+    if (m_joystickValues.size() > 0) {
+        if (stick == 1) {
+            return m_joystickValues[pad].first->getY();
+        } else if (stick == 2) {
+            return m_joystickValues[pad].second->getY();
+        }
+    }
+
+    return 0;
 }

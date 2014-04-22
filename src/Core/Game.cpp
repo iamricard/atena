@@ -6,8 +6,8 @@
  */
 
 #include <cstdio>
-
 #include "./Game.h"
+#include "../Examples/Bahamut.h"
 
 Game* Game::s_pInstance = 0;
 Game::Game():
@@ -48,15 +48,14 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
 
     printf("Init succes\n");
     m_Running = true;
+
+    m_gameObjects.push_back(
+        new Bahamut(new LoaderParams("Sprites1", "Bahamut", 100, 100)));
 }
 
 void Game::render() {
     SDL_RenderClear(m_pRenderer);
-    // @todo(rcsole): this is here for testing purposes, but it is not right
-    AGETextures::Instance()->drawFrame("Sprites1",
-                                       "bahamut.png",
-                                       100, 100,
-                                       m_pRenderer);
+    drawGameObjects();
     SDL_RenderPresent(m_pRenderer);
 }
 
@@ -72,15 +71,10 @@ void Game::clean() {
 
 void Game::handleEvents() {
     AGEInput::Instance()->update();
-    // SDL_Event event;
-    // if (SDL_PollEvent(&event)) {
-    //     switch (event.type) {
-    //         case SDL_QUIT:
-    //             m_Running = false;
-    //             break;
+}
 
-    //         default:
-    //             break;
-    //     }
-    // }
+void Game::drawGameObjects() {
+    for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++) {
+        m_gameObjects[i]->draw(m_pRenderer);
+    }
 }

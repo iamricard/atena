@@ -11,7 +11,7 @@
 #include <SDL2/SDL.h>
 #include <vector>
 
-#include "./Game.h"
+#include "../Utils/Vector2D.h"
 
 class InputHandler {
  public:
@@ -26,15 +26,23 @@ class InputHandler {
     void update();
     void clean();
 
+    int getXAxis(int pad, int stick) const;
+    int getYAxis(int pad, int stick) const;
+
     void initialiseJoysticks();
     bool joysticksInitialised() { return m_bJoysticksInitialised; }
 
  private:
-    InputHandler() {}
+    InputHandler():
+        m_joystickDeadZone(10000) {}
     ~InputHandler() {}
 
     std::vector<SDL_Joystick*> m_joysticks;
+    std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
+
     bool m_bJoysticksInitialised;
+
+    int m_joystickDeadZone;
 
     static InputHandler* s_pInstance;
 };

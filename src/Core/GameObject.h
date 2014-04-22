@@ -18,13 +18,25 @@
 
 class GameObject {
  public:
-    virtual void draw()=0;
+    virtual void draw(SDL_Renderer *ren)=0;
     virtual void update()=0;
     virtual void clean()=0;
 
  protected:
-    GameObject(const LoaderParams *pParams) {}
+    GameObject(const LoaderParams *pParams);
     virtual ~GameObject() {}
+
+    int m_x;
+    int m_y;
+
+    int m_width;
+    int m_height;
+
+    int m_row;
+    int m_frame;
+
+    std::string m_textureKey;
+    std::string m_frameKey;
 };
 
 #endif

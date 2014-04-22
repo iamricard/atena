@@ -6,12 +6,14 @@
 add_subdirectory(Core)
 add_subdirectory(Utils)
 add_subdirectory(Textures)
+add_subdirectory(Examples)
 
 # Set all core libs to ${CORE_LIBS}
 set(CORE_LIBS
     CORE
     UTILS
-    texmgr
+    TEXMGR
+    BAHAMUT
 
     jansson
     Box2D

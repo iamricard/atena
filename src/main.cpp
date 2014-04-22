@@ -6,6 +6,8 @@
 #include <cstdio>
 
 #include "Core/Game.h"
+#include "Textures/TextureManager.h"
+#include "Core/InputHandler.h"
 
 const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;

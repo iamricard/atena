@@ -2,6 +2,6 @@
 # Date: 3 April 2014
 
 # GLOB all files in current directory
-file(GLOB TEXMGR_SRCS *.cpp *.h)
+file(GLOB BAHAMUT_SRCS *.cpp *.h)
 
-add_library(TEXMGR ${TEXMGR_SRCS})
+add_library(BAHAMUT ${BAHAMUT_SRCS})
