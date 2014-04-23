@@ -10,7 +10,7 @@
 
 class LoaderParams {
  public:
-    LoaderParams(std::string t_key, int x, int y, int w, int h) :
+    LoaderParams(std::string t_key, float x, float y, int w, int h) :
         texture_key(t_key),
         frame_key(""),
         m_x(x),
@@ -19,7 +19,7 @@ class LoaderParams {
         m_height(h),
         m_json(false) {}
 
-    LoaderParams(std::string t_key, std::string f_key, int x, int y) :
+    LoaderParams(std::string t_key, std::string f_key, float x, float y) :
         texture_key(t_key),
         frame_key(f_key),
         m_x(x),

@@ -12,9 +12,9 @@
 #include <SDL2/SDL_image.h>
 #include <string>
 
+#include "../Utils/Vector2D.h"
 #include "../Textures/TextureManager.h"
 #include "../Utils/LoaderParams.h"
-#include "../Utils/Vector2D.h"
 
 class GameObject {
  public:
@@ -26,9 +26,6 @@ class GameObject {
     GameObject(const LoaderParams *pParams);
     virtual ~GameObject() {}
 
-    int m_x;
-    int m_y;
-
     int m_width;
     int m_height;
 
@@ -36,6 +33,10 @@ class GameObject {
     int m_frame;
 
     bool m_json;
+
+    Vector2D m_position;
+    Vector2D m_velocity;
+    Vector2D m_acceleration;
 
     std::string m_textureKey;
     std::string m_frameKey;

@@ -8,13 +8,18 @@
 #ifndef __Vector2D__
 #define __Vector2D__
 
+#include <math.h>
+
 class Vector2D {
  public:
+    Vector2D() {
+        m_x = 0;
+        m_y = 0;
+    }
+
     Vector2D(float x, float y) :
     m_x(x),
     m_y(y) {}
-
-    ~Vector2D();
 
     float getX() { return m_x; }
     float getY() { return m_y; }
@@ -34,7 +39,7 @@ class Vector2D {
     /*
      * Addition
      */
-    Vector2D operator+(const Vector2D &v2) const {
+    Vector2D operator+(const Vector2D& v2) const {
         return Vector2D(m_x + v2.m_x, m_y + v2.m_y);
     }
 

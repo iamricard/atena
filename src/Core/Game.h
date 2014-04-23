@@ -11,7 +11,6 @@
 #include <SDL2/SDL.h>
 #include <vector>
 
-#include "./GameObject.h"
 #include "./InputHandler.h"
 
 class GameObject;
@@ -37,8 +36,6 @@ class Game {
     bool running() { return m_Running; }
 
  private:
-    static Game *s_pInstance;
-
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
 
@@ -47,5 +44,4 @@ class Game {
     std::vector<GameObject*> m_gameObjects;
 };
 
-typedef Game AGEGame;
 #endif

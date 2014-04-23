@@ -2,7 +2,6 @@
 # Date: 30 March 2014
 
 # Add subdirectories
-# add_subdirectory(External)
 add_subdirectory(Core)
 add_subdirectory(Utils)
 add_subdirectory(Textures)
@@ -11,9 +10,9 @@ add_subdirectory(Examples)
 # Set all core libs to ${CORE_LIBS}
 set(CORE_LIBS
     CORE
-    UTILS
     TEXMGR
     BAHAMUT
+    UTILS
 
     jansson
     Box2D

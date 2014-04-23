@@ -9,7 +9,6 @@
 #include "./Game.h"
 #include "../Examples/Bahamut.h"
 
-Game* Game::s_pInstance = 0;
 Game::Game() :
     m_pWindow(0),
     m_pRenderer(0),
@@ -47,15 +46,20 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     printf("Init succes\n");
     m_Running = true;
 
-    LoaderParams *p = new LoaderParams("Sprites1", "bahamut", 100, 100);
-    Bahamut *b = new Bahamut(p);
-    m_gameObjects.push_back(b);
+    m_gameObjects.push_back(
+        new Bahamut(new LoaderParams("Sprites1", "bahamut", 100, 100)));
 }
 
 void Game::render() {
     SDL_RenderClear(m_pRenderer);
     drawGameObjects();
     SDL_RenderPresent(m_pRenderer);
+}
+
+void Game::update() {
+    for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++) {
+        m_gameObjects[i]->update();
+    }
 }
 
 void Game::clean() {

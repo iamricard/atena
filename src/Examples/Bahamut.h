@@ -7,6 +7,7 @@
 
 #include "../Core/GameObject.h"
 #include "../Utils/LoaderParams.h"
+#include "../Core/InputHandler.h"
 
 class Bahamut : public GameObject {
  public:
@@ -14,13 +15,10 @@ class Bahamut : public GameObject {
         GameObject(pParams) {}
     ~Bahamut() {}
 
-    void draw(SDL_Renderer *ren) {
-        GameObject::draw(ren);
-    }
+    void draw(SDL_Renderer *ren);
+    void update();
+    void clean();
 
-    void update() {}
-    void clean() {
-        GameObject::clean();
-        printf("Cleaning Bahamut\n");
-    }
+ private:
+    void handleInput();
 };

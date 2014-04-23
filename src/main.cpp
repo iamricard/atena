@@ -5,9 +5,9 @@
 #include <jansson.h>
 #include <cstdio>
 
-#include "Core/InputHandler.h"
-#include "Core/Game.h"
 #include "Textures/TextureManager.h"
+#include "Core/Game.h"
+#include "Core/InputHandler.h"
 
 const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;
@@ -27,6 +27,7 @@ int main(int argc, char const *argv[]) {
             frameStart = SDL_GetTicks();
 
             AGEGame->handleEvents();
+            AGEGame->update();
             AGEGame->render();
 
             frameTime = SDL_GetTicks() - frameStart;

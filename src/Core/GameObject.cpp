@@ -7,10 +7,9 @@
 
 #include "./GameObject.h"
 
-// @fixme(rcsole): STACK OVERFLOW
 GameObject::GameObject(const LoaderParams *pParams) {
-    m_x = pParams->getX();
-    m_y = pParams->getY();
+    m_position.setX(pParams->getX());
+    m_position.setY(pParams->getY());
 
     m_width = pParams->getWidth();
     m_height = pParams->getHeight();
@@ -27,13 +26,19 @@ GameObject::GameObject(const LoaderParams *pParams) {
 void GameObject::draw(SDL_Renderer *ren) {
     if (!m_json) {
         AGETextures::Instance()->drawFrame(m_textureKey,
-            m_x, m_y, m_width, m_height, m_row, m_frame,
+            m_position.getX(), m_position.getY(),
+            m_width, m_height,
+            m_row, m_frame,
             ren);
     } else {
-        AGETextures::Instance()->drawFrame(m_textureKey, m_frameKey, m_x, m_y,
+        AGETextures::Instance()->drawFrame(m_textureKey, m_frameKey,
+            m_position.getX(), m_position.getY(),
             ren);
     }
 }
 
-void GameObject::update() {}
+void GameObject::update() {
+    m_velocity += m_acceleration;
+    m_position += m_velocity;
+}
 void GameObject::clean() {}
