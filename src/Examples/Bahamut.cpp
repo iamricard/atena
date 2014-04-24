@@ -29,5 +29,10 @@ void Bahamut::handleInput() {
             || AGEInput::Instance()->getXAxis(0, 1) < 1) {
             m_velocity.setX(1 * AGEInput::Instance()->getXAxis(0, 1));
         }
+
+        if (AGEInput::Instance()->getYAxis(0, 1) > 0
+            || AGEInput::Instance()->getYAxis(0, 1) < 1) {
+            m_velocity.setY(1 * AGEInput::Instance()->getYAxis(0, 1));
+        }
     }
 }
