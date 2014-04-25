@@ -9,7 +9,7 @@
 #include "Core/Game.h"
 #include "Core/InputHandler.h"
 
-const int FPS = 60;
+const int FPS = 120;
 const int DELAY_TIME = 1000.0f / FPS;
 
 int main(int argc, char const *argv[]) {

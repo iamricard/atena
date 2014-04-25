@@ -7,7 +7,7 @@
 
 #include <cstdio>
 #include "./Game.h"
-#include "../Examples/Bahamut.h"
+#include "../Examples/Sprite.h"
 
 Game::Game() :
     m_pWindow(0),
@@ -33,6 +33,13 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
                 printf("SDL_CreateRenderer success\n");
                 SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
 
+                m_objectFactory = new GameObjectFactory();
+
+                if (m_objectFactory != NULL) {
+                    printf("Object Factory correctly created\n");
+                } else {
+                    printf("GameObjectFactory error\n");
+                }
             } else {
                 printf("SDL_CreateRenderer error\n");
             }
@@ -46,8 +53,10 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     printf("Init succes\n");
     m_Running = true;
 
-    m_gameObjects.push_back(
-        new Bahamut(new LoaderParams("Sprites1", "Bahamut", 100, 100)));
+    m_objectFactory->registerType("Sprite", new SpriteCreator());
+    GameObject *example = m_objectFactory->create("Sprite");
+    example->load(new LoaderParams("Sprites1", "bahamut", 100, 100));
+    m_gameObjects.push_back(example);
 }
 
 void Game::render() {

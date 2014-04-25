@@ -1,29 +1,33 @@
 /**
  * Atena Game Engine
- * Bahamut.cpp
+ * Sprite.cpp
  *
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
-#include "./Bahamut.h"
+#include "./Sprite.h"
 
-void Bahamut::draw(SDL_Renderer *ren) {
+void Sprite::load(const LoaderParams* pParams) {
+    GameObject::load(pParams);
+}
+
+void Sprite::draw(SDL_Renderer *ren) {
     GameObject::draw(ren);
 }
 
-void Bahamut::update() {
+void Sprite::update() {
     m_velocity.setX(0);
     m_velocity.setY(0);
     handleInput();
     GameObject::update();
 }
 
-void Bahamut::clean() {
+void Sprite::clean() {
     GameObject::clean();
-    printf("Cleaning Bahamut\n");
+    printf("Cleaning Sprite\n");
 }
 
-void Bahamut::handleInput() {
+void Sprite::handleInput() {
     if (AGEInput::Instance()->joysticksInitialised()) {
         if (AGEInput::Instance()->getXAxis(0, 1) > 0
             || AGEInput::Instance()->getXAxis(0, 1) < 1) {

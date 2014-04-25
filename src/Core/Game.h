@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "./InputHandler.h"
+#include "./GameObjectFactory.h"
 
 class GameObject;
 
@@ -20,7 +21,7 @@ class Game {
      Game();
     ~Game() {}
 
-    bool init(const char* title,
+    bool init(const char *title,
             int xpos, int ypos,
             int width, int height,
             int flags);
@@ -36,10 +37,12 @@ class Game {
     bool running() { return m_Running; }
 
  private:
-    SDL_Window* m_pWindow;
-    SDL_Renderer* m_pRenderer;
+    SDL_Window *m_pWindow;
+    SDL_Renderer *m_pRenderer;
 
     bool m_Running;
+
+    GameObjectFactory *m_objectFactory;
 
     std::vector<GameObject*> m_gameObjects;
 };

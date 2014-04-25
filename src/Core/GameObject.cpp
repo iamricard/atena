@@ -7,7 +7,15 @@
 
 #include "./GameObject.h"
 
-GameObject::GameObject(const LoaderParams *pParams) {
+GameObject::GameObject()
+:
+    m_width(0),
+    m_height(0),
+    m_row(0),
+    m_frame(0),
+    m_json(false) {}
+
+void GameObject::load(const LoaderParams *pParams) {
     m_position.setX(pParams->getX());
     m_position.setY(pParams->getY());
 
@@ -41,4 +49,5 @@ void GameObject::update() {
     m_velocity += m_acceleration;
     m_position += m_velocity;
 }
+
 void GameObject::clean() {}

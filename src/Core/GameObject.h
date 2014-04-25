@@ -18,12 +18,13 @@
 
 class GameObject {
  public:
+    virtual void load(const LoaderParams* pParams)=0;
     virtual void draw(SDL_Renderer *ren)=0;
     virtual void update()=0;
     virtual void clean()=0;
 
  protected:
-    GameObject(const LoaderParams *pParams);
+    GameObject();
     virtual ~GameObject() {}
 
     int m_width;
