@@ -44,7 +44,14 @@ Texture::Texture(SDL_Texture *t, json_t *json) {
 }
 
 std::vector<int> Texture::getFrame(std::string key) {
-    return frames[key];
+    std::unordered_map<std::string, std::vector<int>>::iterator it
+                                                        = frames.find(key);
+
+    if (it == frames.end()) {
+        return std::vector<int>();
+    } else {
+        return frames[key];
+    }
 }
 
 SDL_Texture* Texture::getTexture() {

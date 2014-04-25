@@ -14,21 +14,29 @@ void TextureManager::drawFrame(std::string texture_key, std::string frame_key,
                                SDL_Renderer* pRenderer) {
     std::vector<int> coords = m_textureMap[texture_key]->getFrame(frame_key);
 
-    SDL_Rect srcRect;
-    SDL_Rect dstRect;
+    if (coords.empty()) {
+        printf("Frame %s not found in texture %s\n",
+                        frame_key.c_str(), texture_key.c_str());
+    } else {
+        printf("Frame %s found in texture %s\n",
+                        frame_key.c_str(), texture_key.c_str());
 
-    srcRect.x = coords[0];
-    srcRect.y = coords[1];
-    srcRect.w = dstRect.w = coords[2];
-    srcRect.h = dstRect.h = coords[3];
-    dstRect.x = x;
-    dstRect.y = y;
+        SDL_Rect srcRect;
+        SDL_Rect dstRect;
 
-    SDL_RenderCopyEx(pRenderer,
-                     m_textureMap[texture_key]->getTexture(),
-                     &srcRect, &dstRect,
-                     0, 0,
-                     SDL_FLIP_NONE);
+        srcRect.x = coords[0];
+        srcRect.y = coords[1];
+        srcRect.w = dstRect.w = coords[2];
+        srcRect.h = dstRect.h = coords[3];
+        dstRect.x = x;
+        dstRect.y = y;
+
+        SDL_RenderCopyEx(pRenderer,
+                         m_textureMap[texture_key]->getTexture(),
+                         &srcRect, &dstRect,
+                         0, 0,
+                         SDL_FLIP_NONE);
+    }
 }
 
 void TextureManager::drawFrame(std::string texture_key,

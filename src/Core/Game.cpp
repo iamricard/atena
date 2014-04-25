@@ -47,7 +47,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     m_Running = true;
 
     m_gameObjects.push_back(
-        new Bahamut(new LoaderParams("Sprites1", "bahamut", 100, 100)));
+        new Bahamut(new LoaderParams("Sprites1", "Bahamut", 100, 100)));
 }
 
 void Game::render() {
