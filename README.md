@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.org/rcsole/Atena.svg?branch=master)](https://travis-ci.org/rcsole/Atena)
 
 # Atena Game Engine
-## Sprint 1
+## Sprint 2
 ### Objectives
-* Game Object Factory
-* Input Handler
-* Texture Manager **(done)**
+* Game State Machine
+* Extend GameObjectFactory
+* Input keys generator
 
 ## How to build
 ### Linux
