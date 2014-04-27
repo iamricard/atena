@@ -8,8 +8,13 @@
 #ifndef __TextureManager__
 #define __TextureManager__
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#ifdef __GNUC__
+ #include <SDL2/SDL.h>
+ #include <SDL2/SDL_image.h>
+#else
+ #include <SDL.h>
+ #include <SDL_image.h>
+#endif
 #include <jansson.h>
 
 #include <unordered_map>

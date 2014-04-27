@@ -37,6 +37,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
 
                 if (m_objectFactory != NULL) {
                     printf("Object Factory correctly created\n");
+					return true;
                 } else {
                     printf("GameObjectFactory error\n");
                 }

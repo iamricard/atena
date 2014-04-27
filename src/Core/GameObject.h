@@ -8,8 +8,14 @@
 #ifndef __GameObject__
 #define __GameObject__
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#ifdef __GNUC__
+ #include <SDL2/SDL.h>
+ #include <SDL2/SDL_image.h>
+#else
+ #include <SDL.h>
+ #include <SDL_image.h>
+#endif
+
 #include <string>
 
 #include "../Utils/Vector2D.h"
