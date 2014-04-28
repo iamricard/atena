@@ -34,6 +34,9 @@ cmake .. -G "CodeBlocks - Unix Makefiles"
 codeblocks Atena.cbp
 ```
 
+### Windows
+I'm still working on the Windows build, but if you want to contribute and need a hand setting it up, email me or comment on the Windows Build issue (#16)
+
 ## Powered by
 * **[SDL2](https://www.libsdl.org/)**
 
