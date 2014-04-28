@@ -17,7 +17,7 @@
 const int FPS = 120;
 const int DELAY_TIME = 1000.0f / FPS;
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char *argv[]) {
     Uint32 frameStart, frameTime;
     Game *AGEGame = new Game();
     if (AGEGame->init("Atena Game Engine v0.0.1",
