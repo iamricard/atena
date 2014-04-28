@@ -22,3 +22,13 @@
 
 # build folder
 build/
+
+# VS files
+*.sdf
+*.opensdf
+*.suo
+*.sln
+*.vcxproj
+*.filters
+*.user
+Debug/
