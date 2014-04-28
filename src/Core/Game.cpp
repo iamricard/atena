@@ -37,18 +37,21 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
 
                 if (m_objectFactory != NULL) {
                     printf("Object Factory correctly created\n");
-					return true;
                 } else {
                     printf("GameObjectFactory error\n");
+					return false;
                 }
             } else {
                 printf("SDL_CreateRenderer error\n");
+				return false;
             }
         } else {
             printf("SDL_CreateWindow error\n");
+			return false;
         }
     } else {
         printf("SDL_Init error\n");
+		return false;
     }
 
     printf("Init succes\n");
@@ -58,6 +61,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     GameObject *example = m_objectFactory->create("Sprite");
     example->load(new LoaderParams("Sprites1", "bahamut", 100, 100));
     m_gameObjects.push_back(example);
+
+	return true;
 }
 
 void Game::render() {
