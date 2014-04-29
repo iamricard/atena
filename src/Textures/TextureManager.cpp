@@ -14,13 +14,7 @@ void TextureManager::drawFrame(std::string texture_key, std::string frame_key,
                                SDL_Renderer* pRenderer) {
     std::vector<int> coords = m_textureMap[texture_key]->getFrame(frame_key);
 
-    if (coords.empty()) {
-        printf("Frame %s not found in texture %s\n",
-                        frame_key.c_str(), texture_key.c_str());
-    } else {
-        printf("Frame %s found in texture %s\n",
-                        frame_key.c_str(), texture_key.c_str());
-
+    if (!coords.empty()) {
         SDL_Rect srcRect;
         SDL_Rect dstRect;
 

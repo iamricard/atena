@@ -11,13 +11,15 @@ InputHandler* InputHandler::s_pInstance = 0;
 
 void InputHandler::init(Game *game) {
     g_pGame = game;
-    if (SDL_WasInit(SDL_INIT_JOYSTICK) == 0) {
-        SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+    if (SDL_WasInit(SDL_INIT_GAMECONTROLLER) == 0) {
+        SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
+        printf("NEW SYSTEM INITIALISED\n");
+        printf("\tGAMECONTROLLER INITIALISED\n\n");
     }
 
     if (SDL_NumJoysticks() > 0) {
         for (int i = 0; i < SDL_NumJoysticks(); i++) {
-            SDL_Joystick* joy = SDL_JoystickOpen(i);
+            SDL_GameController* joy = SDL_GameControllerOpen(i);
 
             if (joy != NULL) {
                 printf("Initialised one gamepad:\n\t * %s\n",
@@ -44,7 +46,7 @@ void InputHandler::init(Game *game) {
 void InputHandler::clean() {
     if (m_bJoysticksInitialised) {
         for (int i = 0; i < SDL_NumJoysticks(); i++) {
-            SDL_JoystickClose(m_joysticks[i]);
+            SDL_GameControllerClose(m_joysticks[i]);
         }
     }
 }

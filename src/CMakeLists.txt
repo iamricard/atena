@@ -11,7 +11,7 @@ add_subdirectory(Examples)
 set(CORE_LIBS
     CORE
     TEXMGR
-    BAHAMUT
+    SPRITE
     UTILS
 
     jansson

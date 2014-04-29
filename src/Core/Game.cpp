@@ -5,19 +5,29 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
+#include <assert.h>
 #include <cstdio>
 #include "./Game.h"
 #include "../Examples/Sprite.h"
 
+bool Game::instantiated_ = false;
+
 Game::Game() :
     m_pWindow(0),
     m_pRenderer(0),
-    m_Running(false) {}
+    m_Running(false) {
+        assert(!instantiated_);
+        instantiated_= true;
+}
 
 bool Game::init(const char* title, int xpos, int ypos, int width,
                                     int height, int flags) {
-    if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
-        printf("SDL_Init success\n");
+    if (SDL_Init(SDL_INIT_VIDEO || SDL_INIT_EVENTS || SDL_INIT_AUDIO) == 0) {
+        // @todo(rcsole): Maybe add a SDL_WasInit for each and check?
+        printf("SYSTEMS INITIALISED:\n");
+        printf("\tVIDEO INITIALISED\n");
+        printf("\tEVENTS INITIALISED\n");
+        printf("\tAUDIO INITIALISED\n\n");
 
         m_pWindow = SDL_CreateWindow(title,
                 xpos, ypos,
@@ -39,19 +49,19 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
                     printf("Object Factory correctly created\n");
                 } else {
                     printf("GameObjectFactory error\n");
-					return false;
+                    return false;
                 }
             } else {
                 printf("SDL_CreateRenderer error\n");
-				return false;
+                return false;
             }
         } else {
             printf("SDL_CreateWindow error\n");
-			return false;
+            return false;
         }
     } else {
         printf("SDL_Init error\n");
-		return false;
+        return false;
     }
 
     printf("Init succes\n");
@@ -62,7 +72,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     example->load(new LoaderParams("Sprites1", "bahamut", 100, 100));
     m_gameObjects.push_back(example);
 
-	return true;
+    return true;
 }
 
 void Game::render() {

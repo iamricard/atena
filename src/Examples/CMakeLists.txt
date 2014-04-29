@@ -2,6 +2,6 @@
 # Date: 3 April 2014
 
 # GLOB all files in current directory
-file(GLOB BAHAMUT_SRCS *.cpp *.h)
+file(GLOB SPRITE_SRCS *.cpp *.h)
 
-add_library(BAHAMUT ${BAHAMUT_SRCS})
+add_library(SPRITE ${SPRITE_SRCS})

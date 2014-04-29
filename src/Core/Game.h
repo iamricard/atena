@@ -9,9 +9,9 @@
 #define __Game__
 
 #ifdef __GNUC__
- #include <SDL2/SDL.h>
+#include <SDL2/SDL.h>
 #else
- #include <SDL.h>
+#include <SDL.h>
 #endif
 
 #include <vector>
@@ -46,6 +46,7 @@ class Game {
     SDL_Renderer *m_pRenderer;
 
     bool m_Running;
+    static bool instantiated_;
 
     GameObjectFactory *m_objectFactory;
 

@@ -45,9 +45,11 @@ class InputHandler {
         m_joystickDeadZone(10000) {}
     ~InputHandler() {}
 
+    // I would like to make this a reference, and make the whole
+    // InputHandler class an object instead of a singleton
     Game *g_pGame;
 
-    std::vector<SDL_Joystick*> m_joysticks;
+    std::vector<SDL_GameController*> m_joysticks;
     std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
 
     bool m_bJoysticksInitialised;

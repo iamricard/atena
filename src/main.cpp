@@ -2,13 +2,14 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
+#ifdef __GNUC__
+#include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
+
 #include <jansson.h>
 #include <cstdio>
-#if __GNUC__
- #include <SDL2/SDL.h>
-#else
- #include <SDL.h>
-#endif
 
 #include "Textures/TextureManager.h"
 #include "Core/Game.h"
