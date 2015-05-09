@@ -4,5 +4,6 @@
 # GLOB all files in current directory
 file(GLOB UTILS_SRCS *.cpp *.h)
 
-add_library(UTILS ${UTILS_SRCS})
-set_target_properties(UTILS PROPERTIES LINKER_LANGUAGE CXX)
+# add_library(UTILS ${UTILS_SRCS})
+# set_target_properties(UTILS PROPERTIES LINKER_LANGUAGE CXX)
+include_directories(${UTILS_SRCS})

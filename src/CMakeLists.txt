@@ -12,7 +12,6 @@ set(CORE_LIBS
     CORE
     TEXMGR
     SPRITE
-    UTILS
 
     jansson
     Box2D

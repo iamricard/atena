@@ -50,7 +50,7 @@ class InputHandler {
     Game *g_pGame;
 
     std::vector<SDL_GameController*> m_joysticks;
-    std::vector<std::pair<Vector2D*, Vector2D*>> m_joystickValues;
+    std::vector<std::pair<Vector2D*, Vector2D*> > m_joystickValues;
 
     bool m_bJoysticksInitialised;
 

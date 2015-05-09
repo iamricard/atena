@@ -31,7 +31,7 @@ class Texture {
 
  private:
     SDL_Texture *texture;
-    std::unordered_map<std::string, std::vector<int>> frames;
+    std::unordered_map<std::string, std::vector<int> > frames;
 };
 
 #endif
