@@ -1,51 +1,35 @@
+dist: trusty
+sudo: required
 language: cpp
-compiler:
-    - gcc
+jdk:
+  - oraclejdk8
+matrix:
+  include:
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-3.8
+          packages:
+            - clang-3.8
+      env: COMPILER=clang++-3.8
+
+addons:
+  apt:
+    packages:
+      - p7zip-full
+      - libbox2d-dev
+      - libsdl2-dev
+      - libsdl2-image-dev
+      - libjansson-dev
+      - python2.7
+      - ant
+      - git
 
 before_install:
-    - sudo apt-get install p7zip-full
-    - mkdir deps
-    - cd deps
+  - git clone https://github.com/facebook/buck.git /tmp/buck
+  - cd /tmp/buck && ant && cd -
+  - sudo ln -s /usr/bin/clang++-3.8 /usr/bin/clang++
 
-    - wget https://box2d.googlecode.com/files/Box2D_v2.3.0.7z
-    - 7z x Box2D_v2.3.0.7z
-    - cd Box2D_v2.3.0/Box2D/Build
-    - cmake ..
-    - make
-    - sudo make install
-
-    - cd ../../../
-    - wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
-    - tar xvf SDL2-2.0.3.tar.gz
-    - cd SDL2-2.0.3
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make
-    - sudo make install
-
-    - cd ../../
-    - wget https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz
-    - tar xvf SDL2_image-2.0.0.tar.gz
-    - cd SDL2_image-2.0.0
-    - ./configure
-    - make
-    - sudo make install
-
-    - cd ../
-    - git clone https://github.com/akheron/jansson.git
-    - cd jansson
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make
-    - sudo make install
-
-    - sudo ldconfig
-
-    - cd ../../../
-    - mkdir build
-    - cd build
-    - cmake ..
-
-script: make
+script: /tmp/buck/bin/buck build :atena

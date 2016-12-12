@@ -22,41 +22,40 @@
 class Game;
 
 class InputHandler {
- public:
-    static InputHandler* Instance() {
-        if (s_pInstance == 0) {
-            s_pInstance = new InputHandler();
-        }
-
-        return s_pInstance;
+public:
+  static InputHandler* Instance() {
+    if (s_pInstance == 0) {
+      s_pInstance = new InputHandler();
     }
 
-    void update();
-    void clean();
+    return s_pInstance;
+  }
 
-    int getXAxis(int pad, int stick) const;
-    int getYAxis(int pad, int stick) const;
+  void update();
+  void clean();
 
-    void init(Game *game);
-    bool joysticksInitialised() { return m_bJoysticksInitialised; }
+  int getXAxis(int pad, int stick) const;
+  int getYAxis(int pad, int stick) const;
 
- private:
-    InputHandler():
-        m_joystickDeadZone(10000) {}
-    ~InputHandler() {}
+  void init(Game *game);
+  bool joysticksInitialised() { return m_bJoysticksInitialised; }
 
-    // I would like to make this a reference, and make the whole
-    // InputHandler class an object instead of a singleton
-    Game *g_pGame;
+private:
+  InputHandler() : m_joystickDeadZone(10000) {}
+  ~InputHandler() {}
 
-    std::vector<SDL_GameController*> m_joysticks;
-    std::vector<std::pair<Vector2D*, Vector2D*> > m_joystickValues;
+  // I would like to make this a reference, and make the whole
+  // InputHandler class an object instead of a singleton
+  Game *g_pGame;
 
-    bool m_bJoysticksInitialised;
+  std::vector<SDL_GameController*> m_joysticks;
+  std::vector<std::pair<Vector2D*, Vector2D*> > m_joystickValues;
 
-    int m_joystickDeadZone;
+  bool m_bJoysticksInitialised;
 
-    static InputHandler* s_pInstance;
+  int m_joystickDeadZone;
+
+  static InputHandler* s_pInstance;
 };
 typedef InputHandler AGEInput;
 

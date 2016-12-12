@@ -21,17 +21,17 @@
 #include <string>
 
 class Texture {
- public:
-     explicit Texture(SDL_Texture *t) : texture(t) {}
-     Texture(SDL_Texture *t, json_t *json);
-    ~Texture();
+public:
+  explicit Texture(SDL_Texture *t) : texture(t) {}
+  Texture(SDL_Texture *t, json_t *json);
+  ~Texture();
 
-    std::vector<int> getFrame(std::string key);
-    SDL_Texture* getTexture();
+  std::vector<int> getFrame(std::string key);
+  SDL_Texture* getTexture();
 
- private:
-    SDL_Texture *texture;
-    std::unordered_map<std::string, std::vector<int> > frames;
+private:
+  SDL_Texture *texture;
+  std::unordered_map<std::string, std::vector<int> > frames;
 };
 
 #endif

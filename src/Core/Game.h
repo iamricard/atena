@@ -17,40 +17,39 @@
 #include <vector>
 
 #include "./InputHandler.h"
+#include "./GameObject.h"
 #include "./GameObjectFactory.h"
 
-class GameObject;
-
 class Game {
- public:
-     Game();
-    ~Game() {}
+public:
+  Game();
+  ~Game() {}
 
-    bool init(const char *title,
-            int xpos, int ypos,
-            int width, int height,
-            int flags);
-    void render();
-    void update();
-    void handleEvents();
-    void clean();
-    void quit() { m_Running = false; }
+  bool init(const char *title,
+          int xpos, int ypos,
+          int width, int height,
+          int flags);
+  void render();
+  void update();
+  void handleEvents();
+  void clean();
+  void quit() { m_Running = false; }
 
-    void drawGameObjects();
+  void drawGameObjects();
 
-    SDL_Renderer* getRenderer() const { return m_pRenderer; }
-    bool running() { return m_Running; }
+  SDL_Renderer* getRenderer() const { return m_pRenderer; }
+  bool running() { return m_Running; }
 
- private:
-    SDL_Window *m_pWindow;
-    SDL_Renderer *m_pRenderer;
+private:
+  SDL_Window *m_pWindow;
+  SDL_Renderer *m_pRenderer;
 
-    bool m_Running;
-    static bool instantiated_;
+  bool m_Running;
+  static bool instantiated_;
 
-    GameObjectFactory *m_objectFactory;
+  GameObjectFactory *m_objectFactory;
 
-    std::vector<GameObject*> m_gameObjects;
+  std::vector<GameObject*> m_gameObjects;
 };
 
 #endif

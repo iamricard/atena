@@ -1,0 +1,15 @@
+[cxx]
+  cxx = /usr/bin/clang++
+  cxxflags = \
+    -std=c++11 \
+    -Wall \
+    -Wno-unused
+  ld = /usr/bin/clang++
+  ldflags = \
+    -lSDL2 \
+    -lSDL2_image \
+    -ljansson \
+    -lBox2D
+
+[httpserver]
+  port = 8086

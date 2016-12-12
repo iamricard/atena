@@ -24,44 +24,45 @@
 #include "./Texture.h"
 
 class TextureManager {
- public:
-    static TextureManager* Instance() {
-        if (s_pInstance == 0) {
-            s_pInstance = new TextureManager();
-        }
-
-        return s_pInstance;
+public:
+  static TextureManager* Instance() {
+    if (s_pInstance == 0) {
+      s_pInstance = new TextureManager();
     }
 
-    bool load(std::string key, std::string pathJSON, std::string pathIMG,
-              SDL_Renderer *ren);
-    bool load(std::string key, std::string pathIMG,
-              SDL_Renderer *ren);
+    return s_pInstance;
+  }
 
-    void drawFrame(std::string texture_key, std::string frame_key,
-                   int x, int y,
-                   SDL_Renderer *pRenderer);
-    void drawFrame(std::string texture_key,
-                   int x, int y,
-                   int witdh, int height,
-                   int row, int frame,
-                   SDL_Renderer *pRenderer);
-    void draw(std::string texture_key,
-              int x, int y,
-              int width, int height,
-              SDL_Renderer *pRenderer);
+  bool load(std::string key, std::string pathJSON, std::string pathIMG,
+            SDL_Renderer *ren);
+  bool load(std::string key, std::string pathIMG,
+            SDL_Renderer *ren);
 
- private:
-     TextureManager() {}
-    ~TextureManager() {}
+  void drawFrame(std::string texture_key, std::string frame_key,
+                 int x, int y,
+                 SDL_Renderer *pRenderer);
+  void drawFrame(std::string texture_key,
+                 int x, int y,
+                 int witdh, int height,
+                 int row, int frame,
+                 SDL_Renderer *pRenderer);
+  void draw(std::string texture_key,
+            int x, int y,
+            int width, int height,
+            SDL_Renderer *pRenderer);
 
-    SDL_Texture* loadImage(char const *path, SDL_Renderer *ren);
-    json_t* loadJSON(char const *path);
+private:
+  TextureManager() {}
+  ~TextureManager() {}
 
-    std::unordered_map <std::string, Texture*> m_textureMap;
+  SDL_Texture* loadImage(char const *path, SDL_Renderer *ren);
+  json_t* loadJSON(char const *path);
 
-    static TextureManager* s_pInstance;
+  std::unordered_map <std::string, Texture*> m_textureMap;
+
+  static TextureManager* s_pInstance;
 };
 
 typedef TextureManager AGETextures;
+
 #endif

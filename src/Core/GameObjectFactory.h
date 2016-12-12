@@ -13,42 +13,42 @@
 #include "./GameObject.h"
 
 class Creator {
- public:
-    virtual GameObject* createGameObject() const = 0;
-    virtual ~Creator() {}
+public:
+  virtual GameObject* createGameObject() const = 0;
+  virtual ~Creator() {}
 };
 
 class GameObjectFactory {
- public:
-    GameObjectFactory() {}
-    ~GameObjectFactory() {}
+public:
+  GameObjectFactory() {}
+  ~GameObjectFactory() {}
 
-    bool registerType(std::string typeID, Creator* pCreator) {
-        std::map<std::string, Creator*>::iterator it = m_creators.find(typeID);
+  bool registerType(std::string typeID, Creator* pCreator) {
+    std::map<std::string, Creator*>::iterator it = m_creators.find(typeID);
 
-        if (it != m_creators.end()) {
-            delete pCreator;
-        }
-
-        m_creators[typeID] = pCreator;
-
-        return true;
+    if (it != m_creators.end()) {
+        delete pCreator;
     }
 
-    GameObject* create(std::string typeID) {
-        std::map<std::string, Creator*>::iterator it = m_creators.find(typeID);
+    m_creators[typeID] = pCreator;
 
-        if (it == m_creators.end()) {
-            printf("Type %s not found\n", typeID.c_str());
-            return NULL;
-        }
+    return true;
+  }
 
-        Creator* pCreator = (*it).second;
-        return pCreator->createGameObject();
+  GameObject* create(std::string typeID) {
+    std::map<std::string, Creator*>::iterator it = m_creators.find(typeID);
+
+    if (it == m_creators.end()) {
+        printf("Type %s not found\n", typeID.c_str());
+        return NULL;
     }
 
- private:
-    std::map<std::string, Creator*> m_creators;
+    Creator* pCreator = (*it).second;
+    return pCreator->createGameObject();
+  }
+
+private:
+  std::map<std::string, Creator*> m_creators;
 };
 
 #endif

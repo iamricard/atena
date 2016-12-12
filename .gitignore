@@ -34,3 +34,5 @@ build/
 Debug/
 
 .gitshots/
+buck-out/
+.buckd/

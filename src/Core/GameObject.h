@@ -23,30 +23,30 @@
 #include "../Utils/LoaderParams.h"
 
 class GameObject {
- public:
-    virtual void load(const LoaderParams* pParams)=0;
-    virtual void draw(SDL_Renderer *ren)=0;
-    virtual void update()=0;
-    virtual void clean()=0;
+public:
+  virtual void load(const LoaderParams* pParams) = 0;
+  virtual void draw(SDL_Renderer *ren) = 0;
+  virtual void update() = 0;
+  virtual void clean() = 0;
 
- protected:
-    GameObject();
-    virtual ~GameObject() {}
+protected:
+  GameObject();
+  ~GameObject() {}
 
-    int m_width;
-    int m_height;
+  int m_width;
+  int m_height;
 
-    int m_row;
-    int m_frame;
+  int m_row;
+  int m_frame;
 
-    bool m_json;
+  bool m_json;
 
-    Vector2D m_position;
-    Vector2D m_velocity;
-    Vector2D m_acceleration;
+  Vector2D m_position;
+  Vector2D m_velocity;
+  Vector2D m_acceleration;
 
-    std::string m_textureKey;
-    std::string m_frameKey;
+  std::string m_textureKey;
+  std::string m_frameKey;
 };
 
 #endif
