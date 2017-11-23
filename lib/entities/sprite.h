@@ -10,21 +10,19 @@
 #include "atena/input/input-handler.h"
 
 class Sprite : public BaseEntity {
-public:
+ public:
   Sprite() : BaseEntity() {}
   ~Sprite();
 
-  void load(const EntityConfig* pParams);
-  void draw(SDL_Renderer *ren);
+  void load(const EntityConfig* config);
+  void draw(SDL_Renderer* renderer);
   void update();
   void clean();
 
-private:
+ private:
   void handleInput();
 };
 
 class SpriteBuilder : public EntityBuilder {
-  BaseEntity* Build() const {
-    return new Sprite();
-  }
+  BaseEntity* Build() const { return new Sprite(); }
 };

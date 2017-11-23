@@ -5,45 +5,45 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#ifndef __InputHandler__
-#define __InputHandler__
+#ifndef LIB_INPUT_INPUT_HANDLER_H_
+#define LIB_INPUT_INPUT_HANDLER_H_
 
 #include <SDL2/SDL.h>
+#include <utility>
 #include <vector>
 #include "atena/math/vector-2d.h"
 
 class InputHandler {
-public:
+ public:
   static InputHandler* Instance() {
-    if (s_pInstance == 0) {
-      s_pInstance = new InputHandler();
+    if (instance == 0) {
+      instance = new InputHandler();
     }
-
-    return s_pInstance;
+    return instance;
   }
 
   void update();
   void clean();
 
-  int getXAxis(int pad, int stick) const;
-  int getYAxis(int pad, int stick) const;
+  int get_x_positionAxis(int pad, int stick) const;
+  int get_y_positionAxis(int pad, int stick) const;
 
   void init();
-  bool joysticksInitialised() { return m_bJoysticksInitialised; }
+  bool joysticksInitialised() { return are_joysticks_initialised; }
 
-private:
-  InputHandler() : m_joystickDeadZone(10000) {}
+ private:
+  InputHandler() : joystick_dead_zone(10000) {}
   ~InputHandler() {}
 
-  std::vector<SDL_GameController*> m_joysticks;
-  std::vector<std::pair<Vector2D*, Vector2D*> > m_joystickValues;
+  std::vector<SDL_GameController*> joysticks;
+  std::vector<std::pair<Vector2D*, Vector2D*> > joysticks_values;
 
-  bool m_bJoysticksInitialised;
+  bool are_joysticks_initialised;
 
-  int m_joystickDeadZone;
+  int joystick_dead_zone;
 
-  static InputHandler* s_pInstance;
+  static InputHandler* instance;
 };
 typedef InputHandler AGEInput;
 
-#endif
+#endif  // LIB_INPUT_INPUT_HANDLER_H_

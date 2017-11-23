@@ -3,16 +3,16 @@
  */
 
 #include <SDL2/SDL.h>
+#include <jansson.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <jansson.h>
 #include <cstdio>
 
 #define GetCurrentDir getcwd
 
-#include "atena/textures/texture-manager.h"
 #include "atena/core/game.h"
 #include "atena/input/input-handler.h"
+#include "atena/textures/texture-manager.h"
 
 const int FPS = 120;
 const int DELAY_TIME = 1000.0f / FPS;
@@ -27,13 +27,12 @@ int main(int argc, char *argv[]) {
 
   Uint32 frameStart, frameTime;
   Game *AGEGame = new Game();
-  if (AGEGame->init("Atena Game Engine v0.0.1",
-                    100, 100, 640, 480, 0)) {
+  if (AGEGame->init("Atena Game Engine v0.0.1", 100, 100, 640, 480, 0)) {
     AGEInput::Instance()->init();
-    AGETextures::Instance()->load("Sprites1",
-                      std::string(cCurrentPath) + "/test_assets/Sprites1.json",
-                      std::string(cCurrentPath) + "/test_assets/Sprites1.png",
-                      AGEGame->getRenderer());
+    AGETextures::Instance()->load(
+        "Sprites1", std::string(cCurrentPath) + "/test_assets/Sprites1.json",
+        std::string(cCurrentPath) + "/test_assets/Sprites1.png",
+        AGEGame->getRenderer());
 
     while (AGEGame->running()) {
       frameStart = SDL_GetTicks();

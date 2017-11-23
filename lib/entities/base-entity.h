@@ -5,48 +5,48 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#ifndef __ATENA_ENTITIES_BASE_ENTITY__
-#define __ATENA_ENTITIES_BASE_ENTITY__
+#ifndef LIB_ENTITIES_BASE_ENTITY_H_
+#define LIB_ENTITIES_BASE_ENTITY_H_
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
 
+#include "./atena/entities/entity-config.h"
 #include "atena/math/vector-2d.h"
 #include "atena/textures/texture-manager.h"
-#include "./atena/entities/entity-config.h"
 
 class BaseEntity {
-public:
-  virtual void load(const EntityConfig* pParams) = 0;
-  virtual void draw(SDL_Renderer *ren) = 0;
+ public:
+  virtual void load(const EntityConfig* config) = 0;
+  virtual void draw(SDL_Renderer* renderer) = 0;
   virtual void update() = 0;
   virtual void clean() = 0;
 
-protected:
+ protected:
   BaseEntity();
   ~BaseEntity() {}
 
-  int m_width;
-  int m_height;
+  int width;
+  int height;
 
-  int m_row;
-  int m_frame;
+  int row;
+  int frame;
 
-  bool m_json;
+  bool json;
 
-  Vector2D m_position;
-  Vector2D m_velocity;
-  Vector2D m_acceleration;
+  Vector2D position;
+  Vector2D velocity;
+  Vector2D acceleration;
 
-  std::string m_textureKey;
-  std::string m_frameKey;
+  std::string textureKey;
+  std::string frameKey;
 };
 
 class EntityBuilder {
-public:
+ public:
   virtual BaseEntity* Build() const = 0;
   virtual ~EntityBuilder() {}
 };
 
-#endif
+#endif  // LIB_ENTITIES_BASE_ENTITY_H_

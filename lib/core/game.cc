@@ -5,23 +5,20 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
  */
 
+#include "atena/core/game.h"
 #include <assert.h>
 #include <cstdio>
-#include "atena/core/game.h"
 #include "atena/entities/sprite.h"
 
 bool Game::instantiated_ = false;
 
-Game::Game() :
-    window(0),
-    renderer(0),
-    is_running(false) {
-        assert(!instantiated_);
-        instantiated_= true;
+Game::Game() : window(0), renderer(0), is_running(false) {
+  assert(!instantiated_);
+  instantiated_ = true;
 }
 
-bool Game::init(const char* title, int xpos, int ypos, int width,
-                                    int height, int flags) {
+bool Game::init(const char* title, int xpos, int ypos, int width, int height,
+                int flags) {
   if (SDL_Init(SDL_INIT_VIDEO || SDL_INIT_EVENTS || SDL_INIT_AUDIO) == 0) {
     // TODO(rcsole): Maybe add a SDL_WasInit for each and check?
     printf("\nSYSTEMS INITIALISED:\n");
@@ -29,10 +26,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     printf("  * EVENTS INITIALISED\n");
     printf("  * AUDIO INITIALISED\n\n");
 
-    window = SDL_CreateWindow(title,
-                                 xpos, ypos,
-                                 width, height,
-                                 flags);
+    window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 
     if (window != 0) {
       printf("SDL_CreateWindow success\n");
@@ -68,7 +62,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
   is_running = true;
 
   entity_factory->RegisterEntityBuilder("Sprite", new SpriteBuilder());
-  BaseEntity *example = entity_factory->create("Sprite");
+  BaseEntity* example = entity_factory->create("Sprite");
   example->load(new EntityConfig("Sprites1", "bahamut", 100, 100));
   entities.push_back(example);
 
@@ -97,9 +91,7 @@ void Game::clean() {
   SDL_Quit();
 }
 
-void Game::handleEvents() {
-  AGEInput::Instance()->update();
-}
+void Game::handleEvents() { AGEInput::Instance()->update(); }
 
 void Game::drawEntities() {
   for (std::vector<BaseEntity*>::size_type i = 0; i != entities.size(); i++) {

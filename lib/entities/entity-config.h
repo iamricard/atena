@@ -5,53 +5,55 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#ifndef __entityconfig__
-#define __entityconfig__
+#ifndef LIB_ENTITIES_ENTITY_CONFIG_H_
+#define LIB_ENTITIES_ENTITY_CONFIG_H_
+
+#include <string>
 
 class EntityConfig {
-public:
-  EntityConfig(std::string t_key, float x, float y, int w, int h) :
-      m_x(x),
-      m_y(y),
-      m_width(w),
-      m_height(h),
-      m_json(false),
-      texture_key(t_key),
-      frame_key("") {}
+ public:
+  EntityConfig(std::string texture_key, float x, float y, int w, int h)
+      : x(x),
+        y(y),
+        width(w),
+        height(h),
+        json(false),
+        texture_key(texture_key),
+        frame_key("") {}
 
-  EntityConfig(std::string t_key, std::string f_key, float x, float y) :
-      m_x(x),
-      m_y(y),
-      m_width(0),
-      m_height(0),
-      m_json(true),
-      texture_key(t_key),
-      frame_key(f_key) {}
+  EntityConfig(std::string texture_key, std::string frame_key, float x, float y)
+      : x(x),
+        y(y),
+        width(0),
+        height(0),
+        json(true),
+        texture_key(texture_key),
+        frame_key(frame_key) {}
 
   ~EntityConfig();
 
-  int getX() const { return m_x; }
-  int getY() const { return m_y; }
+  int get_x_position() const { return x; }
+  int get_y_position() const { return y; }
 
-  int getWidth() const { return m_width; }
-  int getHeight() const { return m_height; }
+  int get_width() const { return width; }
+  int get_height() const { return height; }
 
-  bool isJSON() const { return m_json; }
+  bool IsJson() const { return json; }
 
-  std::string getTextureKey() const { return texture_key; }
-  std::string getFrameKey() const { return frame_key; }
+  std::string get_texture_key() const { return texture_key; }
+  std::string get_frame_key() const { return frame_key; }
 
-private:
-  int m_x;
-  int m_y;
+ private:
+  int x;
+  int y;
 
-  int m_width;
-  int m_height;
+  int width;
+  int height;
 
-  bool m_json;
+  bool json;
 
   std::string texture_key;
   std::string frame_key;
 };
 
-#endif
+#endif  // LIB_ENTITIES_ENTITY_CONFIG_H_

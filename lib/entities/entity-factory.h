@@ -5,17 +5,19 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#include <string>
 #include <map>
+#include <string>
 #include "./base-entity.h"
 
 class EntityFactory {
-public:
+ public:
   EntityFactory() {}
   ~EntityFactory() {}
 
-  bool RegisterEntityBuilder(std::string typeID, EntityBuilder* entity_builder) {
-    std::map<std::string, EntityBuilder*>::iterator it = entity_builders.find(typeID);
+  bool RegisterEntityBuilder(std::string typeID,
+                             EntityBuilder* entity_builder) {
+    std::map<std::string, EntityBuilder*>::iterator it =
+        entity_builders.find(typeID);
     if (it != entity_builders.end()) {
       delete entity_builder;
     }
@@ -24,7 +26,8 @@ public:
   }
 
   BaseEntity* create(std::string typeID) {
-    std::map<std::string, EntityBuilder*>::iterator it = entity_builders.find(typeID);
+    std::map<std::string, EntityBuilder*>::iterator it =
+        entity_builders.find(typeID);
 
     if (it == entity_builders.end()) {
       printf("Type %s not found\n", typeID.c_str());
@@ -35,6 +38,6 @@ public:
     return entity_builder->Build();
   }
 
-private:
+ private:
   std::map<std::string, EntityBuilder*> entity_builders;
 };

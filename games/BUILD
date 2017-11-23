@@ -2,7 +2,9 @@ cc_binary(
   name = "simple",
   srcs = ["simple.cc"],
   copts = [
-    "-I/usr/local/include/SDL2 -D_THREAD_SAFE -I/usr/local/include",
+    "-I/usr/local/include/SDL2",
+    "-I/usr/local/include",
+    "-D_THREAD_SAFE",
     "-Wall",
     "-Wno-unused",
   ],

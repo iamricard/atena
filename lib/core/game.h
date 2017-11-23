@@ -5,25 +5,23 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#ifndef __Game__
-#define __Game__
+#ifndef LIB_CORE_GAME_H_
+#define LIB_CORE_GAME_H_
 
 #include <SDL2/SDL.h>
 #include <vector>
 
-#include "atena/input/input-handler.h"
 #include "atena/entities/base-entity.h"
 #include "atena/entities/entity-factory.h"
+#include "atena/input/input-handler.h"
 
 class Game {
-public:
+ public:
   Game();
   ~Game() {}
 
-  bool init(const char *title,
-          int xpos, int ypos,
-          int width, int height,
-          int flags);
+  bool init(const char *title, int xpos, int ypos, int width, int height,
+            int flags);
   void render();
   void update();
   void handleEvents();
@@ -32,10 +30,10 @@ public:
 
   void drawEntities();
 
-  SDL_Renderer* getRenderer() const { return renderer; }
+  SDL_Renderer *getRenderer() const { return renderer; }
   bool running() { return is_running; }
 
-private:
+ private:
   SDL_Window *window;
   SDL_Renderer *renderer;
 
@@ -44,7 +42,7 @@ private:
 
   EntityFactory *entity_factory;
 
-  std::vector<BaseEntity*> entities;
+  std::vector<BaseEntity *> entities;
 };
 
-#endif
+#endif  // LIB_CORE_GAME_H_

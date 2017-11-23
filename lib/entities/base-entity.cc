@@ -7,46 +7,39 @@
 
 #include "atena/entities/base-entity.h"
 
-BaseEntity::BaseEntity() :
-  m_width(0),
-  m_height(0),
-  m_row(0),
-  m_frame(0),
-  m_json(false) {}
+BaseEntity::BaseEntity() : width(0), height(0), row(0), frame(0), json(false) {}
 
-void BaseEntity::load(const EntityConfig *pParams) {
-  m_position.setX(pParams->getX());
-  m_position.setY(pParams->getY());
+void BaseEntity::load(const EntityConfig *config) {
+  position.set_x_position(config->get_x_position());
+  position.set_y_position(config->get_y_position());
 
-  m_width = pParams->getWidth();
-  m_height = pParams->getHeight();
+  width = config->get_width();
+  height = config->get_height();
 
-  m_textureKey = pParams->getTextureKey();
-  m_frameKey = pParams->getFrameKey();
+  textureKey = config->get_texture_key();
+  frameKey = config->get_frame_key();
 
-  m_row = 1;
-  m_frame = 1;
+  row = 1;
+  frame = 1;
 
-  m_json = pParams->isJSON();
+  json = config->IsJson();
 }
 
-void BaseEntity::draw(SDL_Renderer *ren) {
-  if (!m_json) {
-    AGETextures::Instance()->drawFrame(m_textureKey,
-        m_position.getX(), m_position.getY(),
-        m_width, m_height,
-        m_row, m_frame,
-        ren);
+void BaseEntity::draw(SDL_Renderer *renderer) {
+  if (!json) {
+    AGETextures::Instance()->drawFrame(textureKey, position.get_x_position(),
+                                       position.get_y_position(), width, height,
+                                       row, frame, renderer);
   } else {
-    AGETextures::Instance()->drawFrame(m_textureKey, m_frameKey,
-        m_position.getX(), m_position.getY(),
-        ren);
+    AGETextures::Instance()->drawFrame(textureKey, frameKey,
+                                       position.get_x_position(),
+                                       position.get_y_position(), renderer);
   }
 }
 
 void BaseEntity::update() {
-  m_velocity += m_acceleration;
-  m_position += m_velocity;
+  velocity += acceleration;
+  position += velocity;
 }
 
 void BaseEntity::clean() {}

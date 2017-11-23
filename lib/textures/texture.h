@@ -10,20 +10,20 @@
 
 #include <SDL2/SDL.h>
 #include <jansson.h>
+#include <string>
 #include <unordered_map>
 #include <vector>
-#include <string>
 
 class Texture {
-public:
+ public:
   explicit Texture(SDL_Texture *t) : texture(t) {}
   Texture(SDL_Texture *t, json_t *json);
   ~Texture();
 
   std::vector<int> getFrame(std::string key);
-  SDL_Texture* getTexture();
+  SDL_Texture *getTexture();
 
-private:
+ private:
   SDL_Texture *texture;
   std::unordered_map<std::string, std::vector<int> > frames;
 };
