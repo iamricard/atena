@@ -1,16 +1,15 @@
 /**
  * Atena Game Engine
- * InputHandler.cpp
+ * input-handler.cc
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#include "./InputHandler.h"
+#include "atena/input/input-handler.h"
 
 InputHandler* InputHandler::s_pInstance = 0;
 
-void InputHandler::init(Game *game) {
-  g_pGame = game;
+void InputHandler::init() {
   if (SDL_WasInit(SDL_INIT_GAMECONTROLLER) == 0) {
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
     printf("\nNEW SYSTEM INITIALISED\n");
@@ -55,10 +54,6 @@ void InputHandler::update() {
   SDL_Event event;
 
   while (SDL_PollEvent(&event)) {
-    if (event.type == SDL_QUIT) {
-      g_pGame->quit();
-    }
-
     if (event.type == SDL_JOYAXISMOTION) {
       int which = event.jaxis.which;
 

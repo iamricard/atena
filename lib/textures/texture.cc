@@ -1,11 +1,11 @@
 /**
  * Atena Game Engine
- * Texture.cpp
+ * texture.cc
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#include "./Texture.h"
+#include "atena/textures/texture.h"
 
 Texture::Texture(SDL_Texture *t, json_t *json) {
     size_t i;

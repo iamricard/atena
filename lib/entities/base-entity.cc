@@ -1,20 +1,20 @@
 /**
  * Atena Game Engine
- * GameObject.cpp
+ * entity.cc
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#include "./GameObject.h"
+#include "atena/entities/base-entity.h"
 
-GameObject::GameObject() :
+BaseEntity::BaseEntity() :
   m_width(0),
   m_height(0),
   m_row(0),
   m_frame(0),
   m_json(false) {}
 
-void GameObject::load(const LoaderParams *pParams) {
+void BaseEntity::load(const EntityConfig *pParams) {
   m_position.setX(pParams->getX());
   m_position.setY(pParams->getY());
 
@@ -30,7 +30,7 @@ void GameObject::load(const LoaderParams *pParams) {
   m_json = pParams->isJSON();
 }
 
-void GameObject::draw(SDL_Renderer *ren) {
+void BaseEntity::draw(SDL_Renderer *ren) {
   if (!m_json) {
     AGETextures::Instance()->drawFrame(m_textureKey,
         m_position.getX(), m_position.getY(),
@@ -44,9 +44,9 @@ void GameObject::draw(SDL_Renderer *ren) {
   }
 }
 
-void GameObject::update() {
+void BaseEntity::update() {
   m_velocity += m_acceleration;
   m_position += m_velocity;
 }
 
-void GameObject::clean() {}
+void BaseEntity::clean() {}

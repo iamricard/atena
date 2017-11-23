@@ -1,11 +1,11 @@
 /**
  * Atena Game Engine
- * TextureManager.cpp
+ * texture-manager.cc
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#include "./TextureManager.h"
+#include "./atena/textures/texture-manager.h"
 
 TextureManager* TextureManager::s_pInstance = 0;
 

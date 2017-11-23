@@ -7,15 +7,15 @@
 
 #include <assert.h>
 #include <cstdio>
-#include "./Game.h"
-#include "../Sprite/Sprite.h"
+#include "atena/core/game.h"
+#include "atena/entities/sprite.h"
 
 bool Game::instantiated_ = false;
 
 Game::Game() :
-    m_pWindow(0),
-    m_pRenderer(0),
-    m_Running(false) {
+    window(0),
+    renderer(0),
+    is_running(false) {
         assert(!instantiated_);
         instantiated_= true;
 }
@@ -29,26 +29,26 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
     printf("  * EVENTS INITIALISED\n");
     printf("  * AUDIO INITIALISED\n\n");
 
-    m_pWindow = SDL_CreateWindow(title,
+    window = SDL_CreateWindow(title,
                                  xpos, ypos,
                                  width, height,
                                  flags);
 
-    if (m_pWindow != 0) {
+    if (window != 0) {
       printf("SDL_CreateWindow success\n");
 
-      m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
+      renderer = SDL_CreateRenderer(window, -1, 0);
 
-      if (m_pRenderer != 0) {
+      if (renderer != 0) {
         printf("SDL_CreateRenderer success\n");
-        SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-        m_objectFactory = new GameObjectFactory();
+        entity_factory = new EntityFactory();
 
-        if (m_objectFactory != NULL) {
+        if (entity_factory != NULL) {
           printf("Object Factory correctly created\n");
         } else {
-          printf("GameObjectFactory error\n");
+          printf("EntityFactory error\n");
           return false;
         }
       } else {
@@ -65,25 +65,25 @@ bool Game::init(const char* title, int xpos, int ypos, int width,
   }
 
   printf("Init succes\n");
-  m_Running = true;
+  is_running = true;
 
-  m_objectFactory->registerType("Sprite", new SpriteCreator());
-  GameObject *example = m_objectFactory->create("Sprite");
-  example->load(new LoaderParams("Sprites1", "bahamut", 100, 100));
-  m_gameObjects.push_back(example);
+  entity_factory->RegisterEntityBuilder("Sprite", new SpriteBuilder());
+  BaseEntity *example = entity_factory->create("Sprite");
+  example->load(new EntityConfig("Sprites1", "bahamut", 100, 100));
+  entities.push_back(example);
 
   return true;
 }
 
 void Game::render() {
-  SDL_RenderClear(m_pRenderer);
-  drawGameObjects();
-  SDL_RenderPresent(m_pRenderer);
+  SDL_RenderClear(renderer);
+  drawEntities();
+  SDL_RenderPresent(renderer);
 }
 
 void Game::update() {
-  for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++) {
-    m_gameObjects[i]->update();
+  for (std::vector<BaseEntity*>::size_type i = 0; i != entities.size(); i++) {
+    entities[i]->update();
   }
 }
 
@@ -92,8 +92,8 @@ void Game::clean() {
 
   AGEInput::Instance()->clean();
 
-  SDL_DestroyWindow(m_pWindow);
-  SDL_DestroyRenderer(m_pRenderer);
+  SDL_DestroyWindow(window);
+  SDL_DestroyRenderer(renderer);
   SDL_Quit();
 }
 
@@ -101,8 +101,8 @@ void Game::handleEvents() {
   AGEInput::Instance()->update();
 }
 
-void Game::drawGameObjects() {
-  for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++) {
-    m_gameObjects[i]->draw(m_pRenderer);
+void Game::drawEntities() {
+  for (std::vector<BaseEntity*>::size_type i = 0; i != entities.size(); i++) {
+    entities[i]->draw(renderer);
   }
 }

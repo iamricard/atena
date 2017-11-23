@@ -1,21 +1,15 @@
 /**
  * Atena Game Engine
- * Texture.h
+ * texture.h
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
 #ifndef __Texture__
 #define __Texture__
 
-#ifdef __GNUC__
 #include <SDL2/SDL.h>
-#else
-#include <SDL.h>
-#endif
-
 #include <jansson.h>
-
 #include <unordered_map>
 #include <vector>
 #include <string>

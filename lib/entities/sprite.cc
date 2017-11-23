@@ -1,29 +1,29 @@
 /**
  * Atena Game Engine
- * Sprite.cpp
+ * sprite.cc
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#include "./Sprite.h"
+#include "atena/entities/sprite.h"
 
-void Sprite::load(const LoaderParams* pParams) {
-  GameObject::load(pParams);
+void Sprite::load(const EntityConfig* pParams) {
+  BaseEntity::load(pParams);
 }
 
 void Sprite::draw(SDL_Renderer *ren) {
-  GameObject::draw(ren);
+  BaseEntity::draw(ren);
 }
 
 void Sprite::update() {
   m_velocity.setX(0);
   m_velocity.setY(0);
   handleInput();
-  GameObject::update();
+  BaseEntity::update();
 }
 
 void Sprite::clean() {
-  GameObject::clean();
+  BaseEntity::clean();
   printf("Cleaning Sprite\n");
 }
 

@@ -1,27 +1,21 @@
 /**
  * Atena Game Engine
- * TextureManager.h
+ * texture-manager.h
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
 #ifndef __TextureManager__
 #define __TextureManager__
 
-#ifdef __GNUC__
- #include <SDL2/SDL.h>
- #include <SDL2/SDL_image.h>
-#else
- #include <SDL.h>
- #include <SDL_image.h>
-#endif
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <jansson.h>
-
 #include <unordered_map>
 #include <string>
 #include <cstdio>
 
-#include "./Texture.h"
+#include "./texture.h"
 
 class TextureManager {
 public:

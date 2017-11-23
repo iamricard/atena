@@ -1,16 +1,16 @@
 /**
  * Atena Game Engine
- * LoaderParams.h
+ * entity-config.h
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#ifndef __LOADERPARAMS__
-#define __LOADERPARAMS__
+#ifndef __entityconfig__
+#define __entityconfig__
 
-class LoaderParams {
+class EntityConfig {
 public:
-  LoaderParams(std::string t_key, float x, float y, int w, int h) :
+  EntityConfig(std::string t_key, float x, float y, int w, int h) :
       m_x(x),
       m_y(y),
       m_width(w),
@@ -19,7 +19,7 @@ public:
       texture_key(t_key),
       frame_key("") {}
 
-  LoaderParams(std::string t_key, std::string f_key, float x, float y) :
+  EntityConfig(std::string t_key, std::string f_key, float x, float y) :
       m_x(x),
       m_y(y),
       m_width(0),
@@ -28,7 +28,7 @@ public:
       texture_key(t_key),
       frame_key(f_key) {}
 
-  ~LoaderParams();
+  ~EntityConfig();
 
   int getX() const { return m_x; }
   int getY() const { return m_y; }

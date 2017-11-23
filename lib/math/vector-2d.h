@@ -1,8 +1,8 @@
 /**
  * Atena Game Engine
- * Vector2D.h
+ * vector-2d.h
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
 #ifndef __Vector2D__

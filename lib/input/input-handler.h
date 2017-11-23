@@ -1,25 +1,16 @@
 /**
  * Atena Game Engine
- * InputHandler.h
+ * input-handler.h
  *
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
 #ifndef __InputHandler__
 #define __InputHandler__
 
-#ifdef __GNUC__
- #include <SDL2/SDL.h>
-#else
- #include <SDL.h>
-#endif
-
+#include <SDL2/SDL.h>
 #include <vector>
-
-#include "./Game.h"
-#include "../Utils/Vector2D.h"
-
-class Game;
+#include "atena/math/vector-2d.h"
 
 class InputHandler {
 public:
@@ -37,16 +28,12 @@ public:
   int getXAxis(int pad, int stick) const;
   int getYAxis(int pad, int stick) const;
 
-  void init(Game *game);
+  void init();
   bool joysticksInitialised() { return m_bJoysticksInitialised; }
 
 private:
   InputHandler() : m_joystickDeadZone(10000) {}
   ~InputHandler() {}
-
-  // I would like to make this a reference, and make the whole
-  // InputHandler class an object instead of a singleton
-  Game *g_pGame;
 
   std::vector<SDL_GameController*> m_joysticks;
   std::vector<std::pair<Vector2D*, Vector2D*> > m_joystickValues;

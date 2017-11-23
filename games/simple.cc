@@ -1,28 +1,18 @@
 /**
- * Copyright 2014-present [Ricard Sole <@rcsole, ricard.solecasas@gmail.com>]
+ * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#ifdef __GNUC__
 #include <SDL2/SDL.h>
-#else
-#include <SDL.h>
-#endif
-
 #include <stdio.h>
-#ifdef WINDOWS
-  #include <direct.h>
-  #define GetCurrentDir _getcwd
-#else
-  #include <unistd.h>
-  #define GetCurrentDir getcwd
-#endif
-
+#include <unistd.h>
 #include <jansson.h>
 #include <cstdio>
 
-#include "Textures/TextureManager.h"
-#include "Core/Game.h"
-#include "Core/InputHandler.h"
+#define GetCurrentDir getcwd
+
+#include "atena/textures/texture-manager.h"
+#include "atena/core/game.h"
+#include "atena/input/input-handler.h"
 
 const int FPS = 120;
 const int DELAY_TIME = 1000.0f / FPS;
@@ -30,7 +20,7 @@ const int DELAY_TIME = 1000.0f / FPS;
 int main(int argc, char *argv[]) {
   char cCurrentPath[FILENAME_MAX];
   if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath))) {
-      return 1;
+    return 1;
   }
 
   printf("Current working directory is %s\n", cCurrentPath);
@@ -39,7 +29,7 @@ int main(int argc, char *argv[]) {
   Game *AGEGame = new Game();
   if (AGEGame->init("Atena Game Engine v0.0.1",
                     100, 100, 640, 480, 0)) {
-    AGEInput::Instance()->init(AGEGame);
+    AGEInput::Instance()->init();
     AGETextures::Instance()->load("Sprites1",
                       std::string(cCurrentPath) + "/test_assets/Sprites1.json",
                       std::string(cCurrentPath) + "/test_assets/Sprites1.png",
@@ -59,8 +49,6 @@ int main(int argc, char *argv[]) {
       }
     }
   }
-
-
 
   AGEGame->clean();
 
