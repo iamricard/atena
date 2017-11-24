@@ -29,12 +29,13 @@ int main(int argc, char *argv[]) {
   Game *AGEGame = new Game();
   if (AGEGame->Init("Atena Game Engine v0.0.1", 100, 100, 640, 480, 0)) {
     AGEInput::Instance()->Init();
+    AGEInput::Instance()->On(Event::Quit, [AGEGame]() { AGEGame->Quit(); });
     AGETextures::Instance()->Load(
         "Sprites1", std::string(cCurrentPath) + "/test_assets/Sprites1.json",
         std::string(cCurrentPath) + "/test_assets/Sprites1.png",
         AGEGame->get_renderer());
 
-    while (true) {
+    while (AGEGame->KeepRunning()) {
       frameStart = SDL_GetTicks();
 
       AGEGame->HandleEvents();

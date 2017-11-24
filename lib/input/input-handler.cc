@@ -54,6 +54,14 @@ void InputHandler::Update() {
   SDL_Event event;
 
   while (SDL_PollEvent(&event)) {
+    std::cout << event.type << "\n";
+    if (event.type == SDL_QUIT && event_handlers.count(Event::Quit) > 0) {
+      auto handlers = event_handlers.equal_range(Event::Quit);
+      for (auto handler = handlers.first; handler != handlers.second;
+           ++handler) {
+        handler->second();
+      }
+    }
     if (event.type == SDL_JOYAXISMOTION) {
       int which = event.jaxis.which;
 
@@ -118,6 +126,11 @@ void InputHandler::Update() {
       }
     }
   }
+}
+
+void InputHandler::On(Event event_name, std::function<void()> handler) {
+  event_handlers.insert(
+      std::pair<Event, std::function<void()>>(event_name, handler));
 }
 
 int InputHandler::get_joystick_pos_x(int pad, int stick) const {

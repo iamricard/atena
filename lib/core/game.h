@@ -25,9 +25,10 @@ class Game {
   void Render();
   void Update();
   void HandleEvents();
-  void Clean();
-
   void DrawEntities();
+  void Quit();
+  void Clean();
+  bool KeepRunning();
 
   SDL_Renderer *get_renderer() const { return renderer; }
 
@@ -36,6 +37,7 @@ class Game {
   SDL_Renderer *renderer;
   EntityFactory *entity_factory;
   std::vector<BaseEntity *> entities;
+  bool has_quit;
 
   static bool instantiated_;
 };

@@ -15,6 +15,7 @@ bool Game::instantiated_ = false;
 Game::Game() : window(0), renderer(0) {
   assert(!instantiated_);
   instantiated_ = true;
+  has_quit = false;
 }
 
 bool Game::Init(const char* title, int xpos, int ypos, int width, int height,
@@ -80,6 +81,8 @@ void Game::Update() {
   }
 }
 
+void Game::Quit() { has_quit = true; }
+
 void Game::Clean() {
   printf("Cleaning game\n");
 
@@ -97,3 +100,5 @@ void Game::DrawEntities() {
     entities[i]->Draw(renderer);
   }
 }
+
+bool Game::KeepRunning() { return !has_quit; }
