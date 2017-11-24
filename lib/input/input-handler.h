@@ -22,14 +22,13 @@ class InputHandler {
     return instance;
   }
 
-  void update();
-  void clean();
+  void Init();
+  void Update();
+  void Clean();
 
-  int get_x_positionAxis(int pad, int stick) const;
-  int get_y_positionAxis(int pad, int stick) const;
-
-  void init();
-  bool joysticksInitialised() { return are_joysticks_initialised; }
+  int get_joystick_pos_x(int pad, int stick) const;
+  int get_joystick_pos_y(int pad, int stick) const;
+  bool is_initialized() { return are_joysticks_initialised; }
 
  private:
   InputHandler() : joystick_dead_zone(10000) {}

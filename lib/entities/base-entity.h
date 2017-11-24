@@ -18,10 +18,10 @@
 
 class BaseEntity {
  public:
-  virtual void load(const EntityConfig* config) = 0;
-  virtual void draw(SDL_Renderer* renderer) = 0;
-  virtual void update() = 0;
-  virtual void clean() = 0;
+  virtual void Load(const EntityConfig* config) = 0;
+  virtual void Draw(SDL_Renderer* renderer) = 0;
+  virtual void Update() = 0;
+  virtual void Clean() = 0;
 
  protected:
   BaseEntity();

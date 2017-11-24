@@ -12,14 +12,14 @@
 
 bool Game::instantiated_ = false;
 
-Game::Game() : window(0), renderer(0), is_running(false) {
+Game::Game() : window(0), renderer(0) {
   assert(!instantiated_);
   instantiated_ = true;
 }
 
-bool Game::init(const char* title, int xpos, int ypos, int width, int height,
+bool Game::Init(const char* title, int xpos, int ypos, int width, int height,
                 int flags) {
-  if (SDL_Init(SDL_INIT_VIDEO || SDL_INIT_EVENTS || SDL_INIT_AUDIO) == 0) {
+  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_AUDIO) == 0) {
     // TODO(rcsole): Maybe add a SDL_WasInit for each and check?
     printf("\nSYSTEMS INITIALISED:\n");
     printf("  * VIDEO INITIALISED\n");
@@ -58,43 +58,42 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height,
     return false;
   }
 
-  printf("Init succes\n");
-  is_running = true;
+  printf("Init success\n");
 
   entity_factory->RegisterEntityBuilder("Sprite", new SpriteBuilder());
-  BaseEntity* example = entity_factory->create("Sprite");
-  example->load(new EntityConfig("Sprites1", "bahamut", 100, 100));
+  BaseEntity* example = entity_factory->Build("Sprite");
+  example->Load(new EntityConfig("Sprites1", "bahamut", 100, 100));
   entities.push_back(example);
 
   return true;
 }
 
-void Game::render() {
+void Game::Render() {
   SDL_RenderClear(renderer);
-  drawEntities();
+  DrawEntities();
   SDL_RenderPresent(renderer);
 }
 
-void Game::update() {
+void Game::Update() {
   for (std::vector<BaseEntity*>::size_type i = 0; i != entities.size(); i++) {
-    entities[i]->update();
+    entities[i]->Update();
   }
 }
 
-void Game::clean() {
+void Game::Clean() {
   printf("Cleaning game\n");
 
-  AGEInput::Instance()->clean();
+  AGEInput::Instance()->Clean();
 
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
 }
 
-void Game::handleEvents() { AGEInput::Instance()->update(); }
+void Game::HandleEvents() { AGEInput::Instance()->Update(); }
 
-void Game::drawEntities() {
+void Game::DrawEntities() {
   for (std::vector<BaseEntity*>::size_type i = 0; i != entities.size(); i++) {
-    entities[i]->draw(renderer);
+    entities[i]->Draw(renderer);
   }
 }

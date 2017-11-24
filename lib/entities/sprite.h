@@ -5,6 +5,9 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
+#ifndef LIB_ENTITIES_SPRITE_H_
+#define LIB_ENTITIES_SPRITE_H_
+
 #include "./atena/entities/base-entity.h"
 #include "./atena/entities/entity-config.h"
 #include "atena/input/input-handler.h"
@@ -14,15 +17,17 @@ class Sprite : public BaseEntity {
   Sprite() : BaseEntity() {}
   ~Sprite();
 
-  void load(const EntityConfig* config);
-  void draw(SDL_Renderer* renderer);
-  void update();
-  void clean();
+  void Load(const EntityConfig* config);
+  void Draw(SDL_Renderer* renderer);
+  void Update();
+  void Clean();
 
  private:
-  void handleInput();
+  void HandleInput();
 };
 
 class SpriteBuilder : public EntityBuilder {
   BaseEntity* Build() const { return new Sprite(); }
 };
+
+#endif  // LIB_ENTITIES_SPRITE_H_

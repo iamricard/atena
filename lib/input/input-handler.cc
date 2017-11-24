@@ -9,7 +9,7 @@
 
 InputHandler* InputHandler::instance = 0;
 
-void InputHandler::init() {
+void InputHandler::Init() {
   if (SDL_WasInit(SDL_INIT_GAMECONTROLLER) == 0) {
     SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER);
     printf("\nNEW SYSTEM INITIALISED\n");
@@ -42,7 +42,7 @@ void InputHandler::init() {
   }
 }
 
-void InputHandler::clean() {
+void InputHandler::Clean() {
   if (are_joysticks_initialised) {
     for (int i = 0; i < SDL_NumJoysticks(); i++) {
       SDL_GameControllerClose(joysticks[i]);
@@ -50,7 +50,7 @@ void InputHandler::clean() {
   }
 }
 
-void InputHandler::update() {
+void InputHandler::Update() {
   SDL_Event event;
 
   while (SDL_PollEvent(&event)) {
@@ -120,7 +120,7 @@ void InputHandler::update() {
   }
 }
 
-int InputHandler::get_x_positionAxis(int pad, int stick) const {
+int InputHandler::get_joystick_pos_x(int pad, int stick) const {
   if (joysticks_values.size() > 0) {
     if (stick == 1) {
       return joysticks_values[pad].first->get_x_position();
@@ -132,7 +132,7 @@ int InputHandler::get_x_positionAxis(int pad, int stick) const {
   return 0;
 }
 
-int InputHandler::get_y_positionAxis(int pad, int stick) const {
+int InputHandler::get_joystick_pos_y(int pad, int stick) const {
   if (joysticks_values.size() > 0) {
     if (stick == 1) {
       return joysticks_values[pad].first->get_y_position();

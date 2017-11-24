@@ -7,34 +7,34 @@
 
 #include "atena/entities/sprite.h"
 
-void Sprite::load(const EntityConfig* config) { BaseEntity::load(config); }
+void Sprite::Load(const EntityConfig* config) { BaseEntity::Load(config); }
 
-void Sprite::draw(SDL_Renderer* renderer) { BaseEntity::draw(renderer); }
+void Sprite::Draw(SDL_Renderer* renderer) { BaseEntity::Draw(renderer); }
 
-void Sprite::update() {
+void Sprite::Update() {
+  BaseEntity::Update();
   velocity.set_x_position(0);
   velocity.set_y_position(0);
-  handleInput();
-  BaseEntity::update();
+  HandleInput();
 }
 
-void Sprite::clean() {
-  BaseEntity::clean();
+void Sprite::Clean() {
+  BaseEntity::Clean();
   printf("Cleaning Sprite\n");
 }
 
-void Sprite::handleInput() {
-  if (AGEInput::Instance()->joysticksInitialised()) {
-    if (AGEInput::Instance()->get_x_positionAxis(0, 1) > 0 ||
-        AGEInput::Instance()->get_x_positionAxis(0, 1) < 1) {
+void Sprite::HandleInput() {
+  if (AGEInput::Instance()->is_initialized()) {
+    if (AGEInput::Instance()->get_joystick_pos_x(0, 1) > 0 ||
+        AGEInput::Instance()->get_joystick_pos_x(0, 1) < 1) {
       velocity.set_x_position(1 *
-                              AGEInput::Instance()->get_x_positionAxis(0, 1));
+                              AGEInput::Instance()->get_joystick_pos_x(0, 1));
     }
 
-    if (AGEInput::Instance()->get_y_positionAxis(0, 1) > 0 ||
-        AGEInput::Instance()->get_y_positionAxis(0, 1) < 1) {
+    if (AGEInput::Instance()->get_joystick_pos_y(0, 1) > 0 ||
+        AGEInput::Instance()->get_joystick_pos_y(0, 1) < 1) {
       velocity.set_y_position(1 *
-                              AGEInput::Instance()->get_y_positionAxis(0, 1));
+                              AGEInput::Instance()->get_joystick_pos_y(0, 1));
     }
   }
 }

@@ -20,29 +20,24 @@ class Game {
   Game();
   ~Game() {}
 
-  bool init(const char *title, int xpos, int ypos, int width, int height,
+  bool Init(const char *title, int xpos, int ypos, int width, int height,
             int flags);
-  void render();
-  void update();
-  void handleEvents();
-  void clean();
-  void quit() { is_running = false; }
+  void Render();
+  void Update();
+  void HandleEvents();
+  void Clean();
 
-  void drawEntities();
+  void DrawEntities();
 
-  SDL_Renderer *getRenderer() const { return renderer; }
-  bool running() { return is_running; }
+  SDL_Renderer *get_renderer() const { return renderer; }
 
  private:
   SDL_Window *window;
   SDL_Renderer *renderer;
-
-  bool is_running;
-  static bool instantiated_;
-
   EntityFactory *entity_factory;
-
   std::vector<BaseEntity *> entities;
+
+  static bool instantiated_;
 };
 
 #endif  // LIB_CORE_GAME_H_

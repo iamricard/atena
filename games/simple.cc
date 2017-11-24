@@ -27,19 +27,19 @@ int main(int argc, char *argv[]) {
 
   Uint32 frameStart, frameTime;
   Game *AGEGame = new Game();
-  if (AGEGame->init("Atena Game Engine v0.0.1", 100, 100, 640, 480, 0)) {
-    AGEInput::Instance()->init();
-    AGETextures::Instance()->load(
+  if (AGEGame->Init("Atena Game Engine v0.0.1", 100, 100, 640, 480, 0)) {
+    AGEInput::Instance()->Init();
+    AGETextures::Instance()->Load(
         "Sprites1", std::string(cCurrentPath) + "/test_assets/Sprites1.json",
         std::string(cCurrentPath) + "/test_assets/Sprites1.png",
-        AGEGame->getRenderer());
+        AGEGame->get_renderer());
 
-    while (AGEGame->running()) {
+    while (true) {
       frameStart = SDL_GetTicks();
 
-      AGEGame->handleEvents();
-      AGEGame->update();
-      AGEGame->render();
+      AGEGame->HandleEvents();
+      AGEGame->Update();
+      AGEGame->Render();
 
       frameTime = SDL_GetTicks() - frameStart;
 
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  AGEGame->clean();
+  AGEGame->Clean();
 
   return 0;
 }

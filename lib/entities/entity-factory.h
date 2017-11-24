@@ -5,6 +5,9 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
+#ifndef LIB_ENTITIES_ENTITY_FACTORY_H_
+#define LIB_ENTITIES_ENTITY_FACTORY_H_
+
 #include <map>
 #include <string>
 #include "./base-entity.h"
@@ -25,7 +28,7 @@ class EntityFactory {
     return true;
   }
 
-  BaseEntity* create(std::string typeID) {
+  BaseEntity* Build(std::string typeID) {
     std::map<std::string, EntityBuilder*>::iterator it =
         entity_builders.find(typeID);
 
@@ -41,3 +44,5 @@ class EntityFactory {
  private:
   std::map<std::string, EntityBuilder*> entity_builders;
 };
+
+#endif  // LIB_ENTITIES_ENTITY_FACTORY_H_

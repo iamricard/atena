@@ -9,7 +9,7 @@
 
 BaseEntity::BaseEntity() : width(0), height(0), row(0), frame(0), json(false) {}
 
-void BaseEntity::load(const EntityConfig *config) {
+void BaseEntity::Load(const EntityConfig *config) {
   position.set_x_position(config->get_x_position());
   position.set_y_position(config->get_y_position());
 
@@ -25,21 +25,21 @@ void BaseEntity::load(const EntityConfig *config) {
   json = config->IsJson();
 }
 
-void BaseEntity::draw(SDL_Renderer *renderer) {
+void BaseEntity::Draw(SDL_Renderer *renderer) {
   if (!json) {
-    AGETextures::Instance()->drawFrame(textureKey, position.get_x_position(),
+    AGETextures::Instance()->DrawFrame(textureKey, position.get_x_position(),
                                        position.get_y_position(), width, height,
                                        row, frame, renderer);
   } else {
-    AGETextures::Instance()->drawFrame(textureKey, frameKey,
+    AGETextures::Instance()->DrawFrame(textureKey, frameKey,
                                        position.get_x_position(),
                                        position.get_y_position(), renderer);
   }
 }
 
-void BaseEntity::update() {
+void BaseEntity::Update() {
   velocity += acceleration;
   position += velocity;
 }
 
-void BaseEntity::clean() {}
+void BaseEntity::Clean() {}

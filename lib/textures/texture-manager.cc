@@ -9,7 +9,7 @@
 
 TextureManager *TextureManager::s_pInstance = 0;
 
-void TextureManager::drawFrame(std::string texture_key, std::string frame_key,
+void TextureManager::DrawFrame(std::string texture_key, std::string frame_key,
                                int x, int y, SDL_Renderer *pRenderer) {
   std::vector<int> coords = m_textureMap[texture_key]->getFrame(frame_key);
 
@@ -29,7 +29,7 @@ void TextureManager::drawFrame(std::string texture_key, std::string frame_key,
   }
 }
 
-void TextureManager::drawFrame(std::string texture_key, int x, int y, int width,
+void TextureManager::DrawFrame(std::string texture_key, int x, int y, int width,
                                int height, int row, int frame,
                                SDL_Renderer *pRenderer) {
   SDL_Rect srcRect;
@@ -46,7 +46,7 @@ void TextureManager::drawFrame(std::string texture_key, int x, int y, int width,
                    &dstRect, 0, 0, SDL_FLIP_NONE);
 }
 
-void TextureManager::draw(std::string texture_key, int x, int y, int width,
+void TextureManager::Draw(std::string texture_key, int x, int y, int width,
                           int height, SDL_Renderer *pRenderer) {
   SDL_Rect srcRect;
   SDL_Rect dstRect;
@@ -62,10 +62,10 @@ void TextureManager::draw(std::string texture_key, int x, int y, int width,
                    &dstRect, 0, 0, SDL_FLIP_NONE);
 }
 
-bool TextureManager::load(std::string key, std::string pathIMG,
+bool TextureManager::Load(std::string key, std::string pathIMG,
                           SDL_Renderer *ren) {
   SDL_Texture *tmpTex = NULL;
-  tmpTex = loadImage(pathIMG.c_str(), ren);
+  tmpTex = LoadImage(pathIMG.c_str(), ren);
 
   Texture *t = new Texture(tmpTex);
 
@@ -74,13 +74,13 @@ bool TextureManager::load(std::string key, std::string pathIMG,
   return true;
 }
 
-bool TextureManager::load(std::string key, std::string pathJSON,
+bool TextureManager::Load(std::string key, std::string pathJSON,
                           std::string pathIMG, SDL_Renderer *ren) {
   json_t *tmpJSON = NULL;
   SDL_Texture *tmpTex = NULL;
 
-  tmpTex = loadImage(pathIMG.c_str(), ren);
-  tmpJSON = loadJSON(pathJSON.c_str());
+  tmpTex = LoadImage(pathIMG.c_str(), ren);
+  tmpJSON = LoadJson(pathJSON.c_str());
 
   Texture *t = new Texture(tmpTex, tmpJSON);
 
@@ -89,7 +89,7 @@ bool TextureManager::load(std::string key, std::string pathJSON,
   return true;
 }
 
-SDL_Texture *TextureManager::loadImage(char const *path, SDL_Renderer *ren) {
+SDL_Texture *TextureManager::LoadImage(char const *path, SDL_Renderer *ren) {
   SDL_Texture *tmpTexture = NULL;
   SDL_Surface *tmpSurface = NULL;
 
@@ -113,7 +113,7 @@ SDL_Texture *TextureManager::loadImage(char const *path, SDL_Renderer *ren) {
   return tmpTexture;
 }
 
-json_t *TextureManager::loadJSON(char const *path) {
+json_t *TextureManager::LoadJson(char const *path) {
   json_t *root = NULL;
 
   if (FILE *p_inputFile = fopen(path, "r")) {

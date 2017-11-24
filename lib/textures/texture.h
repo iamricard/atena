@@ -5,8 +5,8 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#ifndef __Texture__
-#define __Texture__
+#ifndef LIB_TEXTURES_TEXTURE_H_
+#define LIB_TEXTURES_TEXTURE_H_
 
 #include <SDL2/SDL.h>
 #include <jansson.h>
@@ -28,4 +28,4 @@ class Texture {
   std::unordered_map<std::string, std::vector<int> > frames;
 };
 
-#endif
+#endif  // LIB_TEXTURES_TEXTURE_H_

@@ -5,8 +5,8 @@
  * Copyright 2014-present [Ricard Sole <@rcsole, ricardsolecasas@gmail.com>]
  */
 
-#ifndef __TextureManager__
-#define __TextureManager__
+#ifndef LIB_TEXTURES_TEXTURE_MANAGER_H_
+#define LIB_TEXTURES_TEXTURE_MANAGER_H_
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -27,23 +27,23 @@ class TextureManager {
     return s_pInstance;
   }
 
-  bool load(std::string key, std::string pathJSON, std::string pathIMG,
+  bool Load(std::string key, std::string pathJSON, std::string pathIMG,
             SDL_Renderer *ren);
-  bool load(std::string key, std::string pathIMG, SDL_Renderer *ren);
+  bool Load(std::string key, std::string pathIMG, SDL_Renderer *ren);
 
-  void drawFrame(std::string texture_key, std::string frame_key, int x, int y,
+  void DrawFrame(std::string texture_key, std::string frame_key, int x, int y,
                  SDL_Renderer *pRenderer);
-  void drawFrame(std::string texture_key, int x, int y, int witdh, int height,
+  void DrawFrame(std::string texture_key, int x, int y, int witdh, int height,
                  int row, int frame, SDL_Renderer *pRenderer);
-  void draw(std::string texture_key, int x, int y, int width, int height,
+  void Draw(std::string texture_key, int x, int y, int width, int height,
             SDL_Renderer *pRenderer);
 
  private:
   TextureManager() {}
   ~TextureManager() {}
 
-  SDL_Texture *loadImage(char const *path, SDL_Renderer *ren);
-  json_t *loadJSON(char const *path);
+  SDL_Texture *LoadImage(char const *path, SDL_Renderer *ren);
+  json_t *LoadJson(char const *path);
 
   std::unordered_map<std::string, Texture *> m_textureMap;
 
@@ -52,4 +52,4 @@ class TextureManager {
 
 typedef TextureManager AGETextures;
 
-#endif
+#endif  // LIB_TEXTURES_TEXTURE_MANAGER_H_
