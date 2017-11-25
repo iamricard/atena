@@ -54,7 +54,6 @@ void InputHandler::Update() {
   SDL_Event event;
 
   while (SDL_PollEvent(&event)) {
-    std::cout << event.type << "\n";
     if (event.type == SDL_QUIT && event_handlers.count(Event::Quit) > 0) {
       auto handlers = event_handlers.equal_range(Event::Quit);
       for (auto handler = handlers.first; handler != handlers.second;

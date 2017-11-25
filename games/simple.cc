@@ -8,8 +8,6 @@
 #include <unistd.h>
 #include <cstdio>
 
-#define GetCurrentDir getcwd
-
 #include "atena/core/game.h"
 #include "atena/input/input-handler.h"
 #include "atena/textures/texture-manager.h"
@@ -18,29 +16,29 @@ const int FPS = 120;
 const int DELAY_TIME = 1000.0f / FPS;
 
 int main(int argc, char *argv[]) {
-  char cCurrentPath[FILENAME_MAX];
-  if (!GetCurrentDir(cCurrentPath, sizeof(cCurrentPath))) {
+  char working_path[FILENAME_MAX];
+  if (!getcwd(working_path, sizeof(working_path))) {
     return 1;
   }
 
-  printf("Current working directory is %s\n", cCurrentPath);
+  printf("Current working directory is %s\n", working_path);
 
   Uint32 frameStart, frameTime;
-  Game *AGEGame = new Game();
-  if (AGEGame->Init("Atena Game Engine v0.0.1", 100, 100, 640, 480, 0)) {
+  Game *game = new Game();
+  if (game->Init("Atena Game Engine v0.0.1", 100, 100, 640, 480, 0)) {
     AGEInput::Instance()->Init();
-    AGEInput::Instance()->On(Event::Quit, [AGEGame]() { AGEGame->Quit(); });
+    AGEInput::Instance()->On(Event::Quit, [game]() { game->Quit(); });
     AGETextures::Instance()->Load(
-        "Sprites1", std::string(cCurrentPath) + "/test_assets/Sprites1.json",
-        std::string(cCurrentPath) + "/test_assets/Sprites1.png",
-        AGEGame->get_renderer());
+        "Sprites1", std::string(working_path) + "/test_assets/Sprites1.json",
+        std::string(working_path) + "/test_assets/Sprites1.png",
+        game->get_renderer());
 
-    while (AGEGame->KeepRunning()) {
+    while (game->KeepRunning()) {
       frameStart = SDL_GetTicks();
 
-      AGEGame->HandleEvents();
-      AGEGame->Update();
-      AGEGame->Render();
+      game->HandleEvents();
+      game->Update();
+      game->Render();
 
       frameTime = SDL_GetTicks() - frameStart;
 
@@ -50,7 +48,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  AGEGame->Clean();
+  game->Clean();
 
   return 0;
 }
