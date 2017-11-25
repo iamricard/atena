@@ -43,11 +43,11 @@ class Vector2D {
     return Vector2D(x_position + v2.x_position, y_position + v2.y_position);
   }
 
-  friend Vector2D &operator+=(Vector2D &v1, const Vector2D &v2) {
-    v1.x_position += v2.x_position;
-    v1.y_position += v2.y_position;
+  Vector2D &operator+=(const Vector2D &other) {
+    this->x_position += other.x_position;
+    this->y_position += other.y_position;
 
-    return v1;
+    return *this;
   }
 
   /*
@@ -57,11 +57,11 @@ class Vector2D {
     return Vector2D(x_position - v2.x_position, y_position + v2.y_position);
   }
 
-  friend Vector2D &operator-=(Vector2D &v1, const Vector2D &v2) {
-    v1.x_position -= v2.x_position;
-    v1.y_position -= v2.y_position;
+  Vector2D &operator-=(const Vector2D &other) {
+    this->x_position -= other.x_position;
+    this->y_position -= other.y_position;
 
-    return v1;
+    return *this;
   }
 
   /*
